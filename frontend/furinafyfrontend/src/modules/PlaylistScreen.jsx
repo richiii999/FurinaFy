@@ -5,3 +5,4 @@ function PlaylistScreen(){
     </div>
     );
 }
+export default PlaylistScreen
