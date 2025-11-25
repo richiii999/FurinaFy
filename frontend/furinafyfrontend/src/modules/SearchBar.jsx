@@ -6,6 +6,7 @@ function SearchBar({ mode = "songs", onSearch }) {
   const placeholder =
     mode === "songs" ? "Search Songs..." : "Search Playlists...";
 
+    
   const handleChange = (e) => {
     const text = e.target.value;
     setValue(text);

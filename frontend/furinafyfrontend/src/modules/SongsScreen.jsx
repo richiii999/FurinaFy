@@ -1,11 +1,9 @@
-
-
-
-export default function SongsScreen(){
+function SongsScreen({ onClick }){
     return (
     <div>
-        <button>songs</button>
+        <button onClick={onClick}>Songs</button>
     </div>
     );
 };
 
+export default SongsScreen

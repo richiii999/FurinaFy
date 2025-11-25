@@ -9,6 +9,7 @@ function MainScreen() {
 
   const handleSearch = (query) => {
     if (searchMode === "songs") {
+
       console.log("Searching songs:", query);
 
     } else {

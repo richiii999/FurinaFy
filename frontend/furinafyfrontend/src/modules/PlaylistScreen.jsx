@@ -1,7 +1,7 @@
-function PlaylistScreen(){
+function PlaylistScreen({ onClick }){
     return (
     <div>
-        <button>Playlists</button>
+        <button onClick={onClick}>Playlists</button>
     </div>
     );
 }
