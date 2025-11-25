@@ -15,6 +15,7 @@ function SearchBar({ mode = "songs", onSearch }) {
 
   return (
     <input
+      className="searchBar"
       type="text"
       placeholder={placeholder}
       value={value}

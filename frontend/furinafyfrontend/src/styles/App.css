@@ -40,3 +40,83 @@
 .read-the-docs {
   color: #888;
 }
+
+
+body{
+  background: solid;
+  background-color: rgb(74,134,232);
+}
+
+.mainbox{
+  padding: 5em;
+  background-color: rgb(207, 226, 243);
+  border: solid .5em rgb(0,255,255);
+border-radius: 1em;
+}
+
+.searchBar{
+padding: 1em;
+width: 30em;
+background-color: rgb(74,134,232);
+border: solid .5em rgb(0,255,255);
+border-radius: 1em;
+margin:2em;
+margin-left: -1em;
+color:white;
+
+}
+
+.songScreen{
+  background-color: rgb(74,134,232);
+border: solid .5em rgb(0,255,255);
+border-radius: 1em;
+
+  padding: 3em;
+ 
+  width:25em;
+  margin:1em;
+  margin-left: 4em;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  
+}
+button{
+   background-color: blue;
+}
+.songScreen button{
+
+  background-color: blue;
+  padding: 1em;
+  margin:1em;
+  width: 13em;
+  font-size: smaller;
+  height: 9em;
+
+  
+}
+ button:hover{
+  color: black;
+  background-color: cyan;
+    transition: 0.7s ease-in-out;
+  
+}
+
+.musicPlayer{
+   background-color: rgb(74,134,232);
+padding: 5em;
+width: 30em;
+border-radius: .5em;
+border: solid .5em rgb(0,255,255);
+  font-size:1em;
+  font-weight: 800;
+  font-family: inherit;
+}
+
+
+.setting_playlist_buttons button{
+  margin: 3em;
+}
+/*rgb(74,134,232)
+rgb(168,184,198)
+rgb(0,255,255)*/
