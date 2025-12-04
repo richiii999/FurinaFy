@@ -45,32 +45,50 @@
 body{
   background: solid;
   background-color: rgb(74,134,232);
+  background-image: url("/public/water.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 0em -30em;
+  color: gold;
+  
 }
 
 .mainbox{
   padding: 5em;
-  background-color: rgb(207, 226, 243);
+  background-color: transparent;
+  backdrop-filter: blur(10px);
+  background-image: url("/public/water.jpg");
+  background-position: -3em,1em;
+  /*
   border: solid .5em rgb(0,255,255);
-border-radius: 1em;
+  border-radius: 1em;
+  backdrop-filter: blur(1vh);
+*/
+
+  border-radius: 1em;
+
+
 }
 
 .searchBar{
 padding: 1em;
 width: 30em;
-background-color: rgb(74,134,232);
-border: solid .5em rgb(0,255,255);
+background-color: transparent;
+backdrop-filter: blur(10px);
+border: solid .5em gold;
 border-radius: 1em;
 margin:2em;
 margin-top: -15em;
 margin-left: -1em;
-color:white;
+color:gold;
 
 }
 
 .songScreen{
+  
   background-color: rgb(74,134,232);
-border: solid .5em rgb(0,255,255);
-border-radius: 1em;
+    box-shadow: 0 0 10px rgba(0,0,0,.2);
+    border-radius: 10px; 
 
   padding: 3em;
  
@@ -80,6 +98,8 @@ border-radius: 1em;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  background-color: transparent;
+  backdrop-filter: blur(40px);
   
 }
 button{
@@ -93,9 +113,11 @@ button{
   width: 13em;
   font-size: smaller;
   height: 9em;
+color:gold;
 
   
 }
+
  button:hover{
   color: black;
   background-color: cyan;
@@ -104,15 +126,23 @@ button{
 }
 
 .musicPlayer{
-   background-color: rgb(74,134,232);
+   background-color: transparent;
+   backdrop-filter: blur(10px);
 padding: 5em;
 padding-top: 3em;
 width: 30em;
 border-radius: .5em;
-border: solid .5em rgb(0,255,255);
+
   font-size:1em;
   font-weight: 800;
   font-family: inherit;
+
+
+
+    box-shadow: 0 0 10px rgba(0,0,0,.2);
+    border-radius: 10px; 
+
+  
 }
 
 
@@ -121,6 +151,8 @@ border: solid .5em rgb(0,255,255);
   margin-top: 1em;
   margin-bottom: 1em;
 }
+
+
 /*rgb(74,134,232)
 rgb(168,184,198)
 rgb(0,255,255)*/
