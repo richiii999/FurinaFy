@@ -12,7 +12,7 @@ function SongCard(){
             <h2 className='songTitle'>Name</h2>
             <p className='songLength'>00:00</p>
             <p className='songArtist'>Artist</p>
-            <button className='songButton' onClick={() => handleClick()}>Click</button>
+            <button className='songButton' onClick={() => handleClick()}>Add to Playlist</button>
         </div>
 );}
 
