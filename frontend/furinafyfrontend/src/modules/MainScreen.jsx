@@ -19,25 +19,20 @@ function MainScreen() {
   };
 
   return (
-    <div className= "mainbox">
+    <div>
       <div>
 
         <SearchBar mode={searchMode} onSearch={handleSearch} />
-      
+
         <SongsScreen onClick={() => setSearchMode("songs")} />
-        
-        
-        {/*settings button is in playlist screen fyi***/}
         <PlaylistScreen onClick={() => setSearchMode("playlists")} />
-   
-       
       </div>
 
       <div >
         {/* TODO STILL (our main page) */}
       </div>
 
-      <div className="musicPlayer">
+      <div>
         <MusicPlayer />
       </div>
     </div>
