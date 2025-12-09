@@ -1,0 +1,58 @@
+.songCard{
+    border: 1px solid hsl(0, 0%, 80%);
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px hsla(0, 0%, 0%, 0.5);
+    padding: 20px;
+    margin: 10px;
+    text-align: center;
+    max-width: 400px;
+    display: inline-block;
+    justify-content: center;
+    align-items: center; 
+
+    display: grid;
+    place-items: center;
+    grid-template-columns: 128px 256px;
+    grid-template-rows: 32px 48px 48px;
+    grid-template-areas: 
+    'songImageArea songTitleArea'
+    'songImageArea songArtistArea'
+    'songImageArea songButtonArea';
+}
+
+.songCard .songImage{
+    grid-area: songImageArea;
+
+    border-radius: 50%; /* Circular crop */
+}
+
+.songCard .songTitle{
+    grid-area: songTitleArea;
+
+    font-family: Arial, sans-serif;
+    color: blue;
+}
+
+.songCard .songText{
+    grid-area: songArtistArea;
+    align-items: left;
+
+    font-family: Arial, sans-serif;
+    color: cyan;
+}
+
+.songCard .songButton{
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500; 
+    font-family: inherit;
+    background-color: #1a1a1a;
+    cursor: pointer;
+    transition: border-color 0.25s;
+
+    grid-area: songButtonArea;
+}
+
+.songCard .songButton:hover { border-color: #646cff; }
