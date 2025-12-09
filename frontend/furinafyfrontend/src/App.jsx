@@ -13,8 +13,8 @@ function App() {
   
   return (
     <>
-      <SongCard/>
-      <DropdownTest/>
+        <SongCard/>
+        <SongCard name="Test Song" artist="Test Artist" length="1:23"/>
     </>
   )
 }
