@@ -13,9 +13,10 @@
     display: grid;
     place-items: center;
     grid-template-columns: 128px 256px;
-    grid-template-rows: 32px 48px 48px;
+    grid-template-rows: 32px 32px 32px 32px;
     grid-template-areas: 
     'songImageArea songTitleArea'
+    'songImageArea songLengthArea'
     'songImageArea songArtistArea'
     'songImageArea songButtonArea';
 }
@@ -29,15 +30,18 @@
 .songCard .songTitle{
     grid-area: songTitleArea;
 
-    font-family: Arial, sans-serif;
     color: blue;
 }
 
-.songCard .songText{
-    grid-area: songArtistArea;
-    align-items: left;
+.songCard .songLength{
+    grid-area: songLengthArea;
 
-    font-family: Arial, sans-serif;
+    color: grey;
+}
+
+.songCard .songArtist{
+    grid-area: songArtistArea;
+
     color: cyan;
 }
 
