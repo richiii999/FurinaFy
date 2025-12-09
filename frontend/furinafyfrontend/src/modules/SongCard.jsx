@@ -10,7 +10,8 @@ function SongCard(){
         <div className="songCard">
             <img className='songImage' src={songImg} alt="songImg"></img>
             <h2 className='songTitle'>Name</h2>
-            <p className='songText'>Artist</p>
+            <p className='songLength'>00:00</p>
+            <p className='songArtist'>Artist</p>
             <button className='songButton' onClick={() => handleClick()}>Click</button>
         </div>
 );}
