@@ -1,4 +1,4 @@
-import songImg from '../assets/kitty.jpg'
+import songImg from '../../public/furina.png'
 
 function SongCard({name, length, artist}){
     
@@ -22,8 +22,9 @@ function SongCard({name, length, artist}){
             <h2 className='songTitle'>{songName}</h2>
             <p className='songLength'>{songLength}</p>
             <p className='songArtist'>{songArtist}</p>
-            <button className='songButton' onClick={() => handleClick()}>Add to Playlist</button>
-            <div className="songDropdown">
+            <button className='songButton' onClick={() => handleClick()}>Add to Playlist
+
+                    <div className="songDropdown">
                 <div>
                     <input type="checkbox" id={check1} name={check1} value={check1}></input>
                     <label htmlFor={check1}> Add to Playlist 1</label>
@@ -37,6 +38,8 @@ function SongCard({name, length, artist}){
                     <label htmlFor={check3}> Add to Playlist 3</label>
                 </div>
             </div>
+            </button>
+        
         </div>
 );}
 
