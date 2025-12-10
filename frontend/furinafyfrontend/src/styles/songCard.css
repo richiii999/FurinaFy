@@ -13,9 +13,10 @@
     display: grid;
     place-items: center;
     grid-template-columns: 128px 256px;
-    grid-template-rows: 32px 48px 48px;
+    grid-template-rows: 32px 32px 32px 32px;
     grid-template-areas: 
     'songImageArea songTitleArea'
+    'songImageArea songLengthArea'
     'songImageArea songArtistArea'
     'songImageArea songButtonArea';
 }
@@ -29,15 +30,18 @@
 .songCard .songTitle{
     grid-area: songTitleArea;
 
-    font-family: Arial, sans-serif;
     color: blue;
 }
 
-.songCard .songText{
-    grid-area: songArtistArea;
-    align-items: left;
+.songCard .songLength{
+    grid-area: songLengthArea;
 
-    font-family: Arial, sans-serif;
+    color: grey;
+}
+
+.songCard .songArtist{
+    grid-area: songArtistArea;
+
     color: cyan;
 }
 
@@ -55,4 +59,22 @@
     grid-area: songButtonArea;
 }
 
-.songCard .songButton:hover { border-color: #646cff; }
+.songCard .songButton:hover { 
+    border-color: #646cff; 
+}
+
+.songDropdown {
+    
+    display: none; /* Changed on hover */
+
+    position: relative; /* annoying, this expands the card */
+    bottom: 0px;
+    left: 200px;
+    width: 160px;
+
+    background-color: grey;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.songDropdown:hover, .songButton:hover +.songDropdown{ display: block; }
