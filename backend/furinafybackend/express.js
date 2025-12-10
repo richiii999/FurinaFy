@@ -2,8 +2,11 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 const mongoose = require('mongoose');
-const Song = require('./models/songModel')
+const Song = require('./models/songModel');
+const cors = require('cors');
 app.use(express.json({limit : '4 gb'}));
+
+app.use(cors());
 
 app.get('/songs', async (req,res) => {
     try{
