@@ -10,9 +10,11 @@ Backend (Using MongoDB and MongoDB-Compass)
 - - Collection (Case Sensitive) "songs"
 - Inside FurinaFy/backend/furinafybackend/
 - - run "node express.js"
+
 The database is now availible at :3000
 
 Frontend 
 - navigate to FurinaFy/frontend/furinafyfrontend
 - run "npm run dev"
+
 The website is now availible at :5173
