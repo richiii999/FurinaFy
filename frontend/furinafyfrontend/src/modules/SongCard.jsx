@@ -13,7 +13,7 @@ function SongCard({name, length, artist}){
     let check3 = songName+"check3"
 
     const handleClick = () => { 
-        console.log("Clicked"); 
+        console.log("Clicked " + songName); 
     }
 
     return(
@@ -23,18 +23,18 @@ function SongCard({name, length, artist}){
             <p className='songLength'>{songLength}</p>
             <p className='songArtist'>{songArtist}</p>
             <button className='songButton' onClick={() => handleClick()}>Add to Playlist</button>
-            <div class="dropdown-content">
+            <div className="songDropdown">
                 <div>
                     <input type="checkbox" id={check1} name={check1} value={check1}></input>
-                    <label for={check1}> Add to Playlist 1</label>
+                    <label htmlFor={check1}> Add to Playlist 1</label>
                 </div>
                 <div>
                     <input type="checkbox" id={check2} name={check2} value={check2}></input>
-                    <label for={check2}> Add to Playlist 2</label>
+                    <label htmlFor={check2}> Add to Playlist 2</label>
                 </div>
                 <div>
                     <input type="checkbox" id={check3} name={check3} value={check3}></input>
-                    <label for={check3}> Add to Playlist 3</label>
+                    <label htmlFor={check3}> Add to Playlist 3</label>
                 </div>
             </div>
         </div>

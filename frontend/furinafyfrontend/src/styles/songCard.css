@@ -59,4 +59,22 @@
     grid-area: songButtonArea;
 }
 
-.songCard .songButton:hover { border-color: #646cff; }
+.songCard .songButton:hover { 
+    border-color: #646cff; 
+}
+
+.songDropdown {
+    
+    display: none; /* Changed on hover */
+
+    position: relative; /* annoying, this expands the card */
+    bottom: 0px;
+    left: 200px;
+    width: 160px;
+
+    background-color: grey;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.songDropdown:hover, .songButton:hover +.songDropdown{ display: block; }
