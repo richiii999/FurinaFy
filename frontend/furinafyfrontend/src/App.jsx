@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import MainScreen from "./modules/MainScreen";
 import './styles/App.css'
+import './styles/MusicPlayer.css'
 
 import SongCard from './modules/SongCard.jsx'
 
 import './styles/SongCard.css'
-import PlayStory from './modules/play.jsx';
+
 
 function App() {
   const [count, setCount] = useState(0)
@@ -13,7 +14,15 @@ function App() {
   return (
 
     
-      <><PlayStory></PlayStory><MainScreen></MainScreen></>
+      <>
+  
+      <MainScreen></MainScreen>
+      
+      
+
+
+
+      </>
     
     
   )

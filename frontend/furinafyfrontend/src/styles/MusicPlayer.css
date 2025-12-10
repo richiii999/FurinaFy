@@ -1,0 +1,31 @@
+
+
+.musicPlayer{
+   background-color: transparent;
+   backdrop-filter: blur(10px);
+  padding: 5em;
+  padding-top: 3em;
+  width: 30em;
+  border-radius: .5em;
+
+  font-size:1em;
+  font-weight: 800;
+  font-family: inherit;
+
+  margin-left: 10em;
+
+    box-shadow: 0 0 10px rgba(0,0,0,.2);
+    border-radius: 10px; 
+
+  
+}
+
+
+.musicPlayer button{
+padding: 1em;
+background-color: black;
+border-radius: 10%;
+margin: 1em;
+}
+
+

@@ -1,6 +1,24 @@
+
+import { useRef } from "react";
+
+
 function MusicPlayer(){
+
+ const audioRef = useRef(new Audio('public/hatsune_miku/demension_dream.mp3'));
+  const playAudio = () => {
+    audioRef.current.play();
+  };
+
+  const stopAudio = () => {
+    audioRef.current.pause();
+  };
+
+
     return (
-    <div>
+    <div className="MusicPlayer">
+
+         <button onClick={playAudio}>Play</button>
+         <button onClick={stopAudio}>Pause</button>
         <p>music player</p>
     </div>
     );
