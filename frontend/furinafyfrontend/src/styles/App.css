@@ -94,22 +94,25 @@ color:gold;
 
 }
 
-.songScreen{
-  
+
+ .SongsScreen{
+ 
   background-color: rgb(74,134,232);
     box-shadow: 0 0 10px rgba(0,0,0,.2);
     border-radius: 10px; 
-
-  padding: 50em;
- 
-  width:25em;
+  
+  width: 50em;
   margin:1em;
   margin-left: 4em;
+
+  background-color: transparent;
+  backdrop-filter: blur(40px);
+
+
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  background-color: transparent;
-  backdrop-filter: blur(40px);
+
   
 }
 

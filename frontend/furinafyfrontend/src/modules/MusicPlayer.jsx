@@ -16,10 +16,13 @@ function MusicPlayer(){
 
     return (
     <div className="MusicPlayer">
-
+         <p>Music Player</p>
+         <button onClick={stopAudio}>Prev</button>
          <button onClick={playAudio}>Play</button>
          <button onClick={stopAudio}>Pause</button>
-        <p>music player</p>
+         <button onClick={stopAudio}>Next</button>
+         <img src="../public/furina_sil1.png"/> 
+        
     </div>
     );
 }

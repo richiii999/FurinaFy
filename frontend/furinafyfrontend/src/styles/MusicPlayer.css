@@ -3,29 +3,50 @@
 .musicPlayer{
    background-color: transparent;
    backdrop-filter: blur(10px);
-  padding: 5em;
-  padding-top: 3em;
-  width: 30em;
+
+
+
+
+
+
+
+
   border-radius: .5em;
 
   font-size:1em;
   font-weight: 800;
   font-family: inherit;
 
-  margin-left: 10em;
-
+  margin-left: 5em;
+ display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
     box-shadow: 0 0 10px rgba(0,0,0,.2);
     border-radius: 10px; 
-
+    display: flex;
+    flex-direction: row;
+    padding: 5em;
+    padding-left: 0;
   
 }
 
 
 .musicPlayer button{
+
 padding: 1em;
 background-color: black;
 border-radius: 10%;
-margin: 1em;
+margin-left: 1em;
+}
+.musicPlayer button:hover{
+
+padding: 1em;
+background-color: cyan;
+color:blue;
 }
 
-
+.musicPlayer img{
+position: relative;
+margin-left: -10em;
+width: 10em;
+}
