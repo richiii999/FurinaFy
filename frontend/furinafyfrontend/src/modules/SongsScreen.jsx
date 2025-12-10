@@ -1,17 +1,24 @@
 import SongCard from "./SongCard";
-function SongsScreen({ onClick }){
-    return (
-    /*temporary rn replaces these with song cards****/
+/* duummy data */
+export const songsData = [
+  { id: 1, name: "Test 1", artist:"Test Artist", length: "1:23" },
+  { id: 2, name: "Test 2", artist:"Test Artist", length: "1:23" },
+  { id: 3, name: "Test 3", artist:"Test Artist", length: "1:23" }
+];
+
+function SongsScreen({ items }) {
+  return (
     <div>
-    <button onClick={onClick}><SongCard/></button>
-    <button onClick={onClick}><SongCard/></button>
-    <button onClick={onClick}><SongCard/></button>
-    <button onClick={onClick}><SongCard/></button>
-    <button onClick={onClick}><SongCard/></button>
-    <button onClick={onClick}>+</button>    
-    <button onClick={onClick}>Songs</button>
+      {items.map((song) => (
+        <SongCard
+          key={song.id}
+          name={song.name}
+          artist={song.artist}
+          length={song.length}
+        />
+      ))}
     </div>
-    );
-};
+  );
+}
 
 export default SongsScreen
