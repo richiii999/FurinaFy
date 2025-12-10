@@ -1,7 +1,8 @@
 # FurinaFy
-CIS 435 Web Tech Project 3: FurinyFy, a spotify clone
+CIS 435 Web Tech Project 3: **FurinyFy**, a music player
 
-*Setup*
+# Setup
+
 Backend (Using MongoDB and MongoDB-Compass)
 - Start MongoDB
 - Start MongoDB Compass:
@@ -11,10 +12,10 @@ Backend (Using MongoDB and MongoDB-Compass)
 - Inside FurinaFy/backend/furinafybackend/
 - - run "node express.js"
 
-The database is now availible at :3000
+The database is now available at :3000
 
 Frontend 
 - navigate to FurinaFy/frontend/furinafyfrontend
 - run "npm run dev"
 
-The website is now availible at :5173
+The website is now available at :5173
