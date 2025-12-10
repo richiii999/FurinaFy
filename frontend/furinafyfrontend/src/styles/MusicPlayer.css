@@ -1,6 +1,6 @@
 
 
-.musicPlayer{
+.helo{
 
 
 
@@ -17,30 +17,16 @@
 
     box-shadow: 0 0 10px rgba(0,0,0,.2);
     border-radius: 10px; 
- 
     padding: 5em;
-    padding-left: 0;
-
-
-    display: grid;
-    grid-template-columns:
-    
-    "musictitle"
-    "stuff"
-
-    ;
-    grid-template-rows: "music" "stuff";
-
-    grid-template-columns: 10fr;
-
 
 
   
 }
-.musicPlayer p{
-    grid-column: musictitle;
-    grid-row: music;
-}
+
+
+
+
+
 
 .musicPlayer button{
   grid-column: stuff;
@@ -59,12 +45,53 @@ background-color: cyan;
 color:blue;
 }
 
-.musicPlayer img{
-  grid-column: music;
-    grid-row: stuff;
-
+.helo img{
 width: 10em;
+margin-left: 1em;
+margin-bottom: 2em;
+height: auto;
+
+}
+input[type="range"]{
+
+width: 100%;
+height:5px;
+
+accent-color: gold;
+
+}
 
 
+.track-duration{
+
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px ;
+}
+
+
+
+.track-duration > p {
+
+font-size: 1em;
+font-weight:0;
+color: gold;
+
+margin: 0;
+
+}
+
+.helo .playbutton{
+    border-radius: 50%;
+    background-color: blue;
+ 
+}
+
+.helo .playbutton img{
+width: 3em;
+margin: 0;
+height: auto;
 
 }
