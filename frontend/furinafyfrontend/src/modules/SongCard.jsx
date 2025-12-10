@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import songImg from '../assets/kitty.jpg'
 
 function SongCard({name, length, artist}){
@@ -12,8 +14,13 @@ function SongCard({name, length, artist}){
     let check2 = songName+"check2"
     let check3 = songName+"check3"
 
-    const handleClick = () => { 
-        console.log("Clicked " + songName); 
+    // Handle checkbox state changes
+    const [checked, setChecked] = useState({});
+
+    const handleChange = (e) => { 
+        console.log("Checked: " + e.target.id); // Print the name of the checkbox
+        
+        // TODO: Actually adds the song to the playlist (1, 2, or 3)
     }
 
     return(
@@ -22,18 +29,18 @@ function SongCard({name, length, artist}){
             <h2 className='songTitle'>{songName}</h2>
             <p className='songLength'>{songLength}</p>
             <p className='songArtist'>{songArtist}</p>
-            <button className='songButton' onClick={() => handleClick()}>Add to Playlist</button>
+            <button className='songButton'>Add to Playlist</button>
             <div className="songDropdown">
                 <div>
-                    <input type="checkbox" id={check1} name={check1} value={check1}></input>
+                    <input type="checkbox" checked={checked.check1} onChange={handleChange} id={check1} name={check1} value={check1}></input>
                     <label htmlFor={check1}> Add to Playlist 1</label>
                 </div>
                 <div>
-                    <input type="checkbox" id={check2} name={check2} value={check2}></input>
+                    <input type="checkbox" checked={checked.check2} onChange={handleChange} id={check2} name={check2} value={check2}></input>
                     <label htmlFor={check2}> Add to Playlist 2</label>
                 </div>
                 <div>
-                    <input type="checkbox" id={check3} name={check3} value={check3}></input>
+                    <input type="checkbox" checked={checked.check3} onChange={handleChange} id={check3} name={check3} value={check3}></input>
                     <label htmlFor={check3}> Add to Playlist 3</label>
                 </div>
             </div>
