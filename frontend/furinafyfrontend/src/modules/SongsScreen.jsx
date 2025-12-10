@@ -10,33 +10,6 @@ function SongsScreen({ items }) {
   return (
     <div className={"SongsScreen"}>
      
-     
-      {items.map((song) => (
-        <SongCard
-          key={song.id}
-          name={song.name}
-          artist={song.artist}
-          length={song.length}
-        />
-      ))}
-       {items.map((song) => (
-        <SongCard
-          key={song.id}
-          name={song.name}
-          artist={song.artist}
-          length={song.length}
-        />
-      ))}
-       {items.map((song) => (
-        <SongCard
-          key={song.id}
-          name={song.name}
-          artist={song.artist}
-          length={song.length}
-        />
-      ))}
-     
-     
      {items.map((song) => (
         <SongCard
           key={song.id}

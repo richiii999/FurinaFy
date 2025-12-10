@@ -9,14 +9,10 @@ import ScreenSwitcher from "./ScreenSwitcher";
 function MainScreen() {
    return (
     <div className="mainbox">
-      <div>
 
-        <ScreenSwitcher />
-      </div>
+     <ScreenSwitcher />
 
-      <div >
-        {/* TODO STILL (our main page) */}
-      </div>
+ 
 
       <div className="musicPlayer">
         <MusicPlayer />

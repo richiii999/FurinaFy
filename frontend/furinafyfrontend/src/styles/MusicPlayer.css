@@ -1,15 +1,11 @@
 
 
 .musicPlayer{
+
+
+
    background-color: transparent;
    backdrop-filter: blur(10px);
-
-
-
-
-
-
-
 
   border-radius: .5em;
 
@@ -18,25 +14,43 @@
   font-family: inherit;
 
   margin-left: 5em;
- display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+
     box-shadow: 0 0 10px rgba(0,0,0,.2);
     border-radius: 10px; 
-    display: flex;
-    flex-direction: row;
+ 
     padding: 5em;
     padding-left: 0;
+
+
+    display: grid;
+    grid-template-columns:
+    
+    "musictitle"
+    "stuff"
+
+    ;
+    grid-template-rows: "music" "stuff";
+
+    grid-template-columns: 10fr;
+
+
+
   
 }
-
+.musicPlayer p{
+    grid-column: musictitle;
+    grid-row: music;
+}
 
 .musicPlayer button{
-
+  grid-column: stuff;
+    grid-row: stuff;
 padding: 1em;
 background-color: black;
 border-radius: 10%;
 margin-left: 1em;
+top: -10em;
+grid-area: buttons;
 }
 .musicPlayer button:hover{
 
@@ -46,7 +60,11 @@ color:blue;
 }
 
 .musicPlayer img{
-position: relative;
-margin-left: -10em;
+  grid-column: music;
+    grid-row: stuff;
+
 width: 10em;
+
+
+
 }

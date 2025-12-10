@@ -40,6 +40,7 @@
 .songCard:hover .songButton{
      background-color: #03045e;
     transition: 0.7s ease-in-out;
+
 }
 .songCard .songImage{
     grid-area: songImageArea;

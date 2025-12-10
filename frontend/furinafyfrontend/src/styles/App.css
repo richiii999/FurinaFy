@@ -69,27 +69,24 @@ body{
   backdrop-filter: blur(10px);
   background-image: url("/public/water.jpg");
   background-position: -3em,1em;
-  /*
-  border: solid .5em rgb(0,255,255);
-  border-radius: 1em;
-  backdrop-filter: blur(1vh);
-*/
 
   border-radius: 1em;
+
 
 
 }
 
 .searchBar{
+position: relative;
 padding: 1em;
-width: 30em;
+padding-right: 20em;
+width: 20em;
+height: 3em;
 background-color: transparent;
 backdrop-filter: blur(10px);
 border: solid .5em gold;
 border-radius: 1em;
-margin:2em;
-margin-top: -15em;
-margin-left: -1em;
+margin-left: 2em;
 color:gold;
 
 }
@@ -97,11 +94,14 @@ color:gold;
 
  .SongsScreen{
  
+
+
+
   background-color: rgb(74,134,232);
     box-shadow: 0 0 10px rgba(0,0,0,.2);
     border-radius: 10px; 
   
-  width: 50em;
+  width: 55em;
   margin:1em;
   margin-left: 4em;
 
@@ -115,7 +115,26 @@ color:gold;
 
   
 }
+.PlaylistScreen{
 
+  background-color: rgb(74,134,232);
+    box-shadow: 0 0 10px rgba(0,0,0,.2);
+    border-radius: 10px; 
+  
+  width: 55em;
+  margin:1em;
+  margin-left: 4em;
+
+  background-color: transparent;
+  backdrop-filter: blur(40px);
+
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+
+}
 
 .setting_playlist_buttons button{
   margin: 3em;

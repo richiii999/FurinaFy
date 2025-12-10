@@ -2,9 +2,7 @@ import { useState } from 'react'
 import MainScreen from "./modules/MainScreen";
 import './styles/App.css'
 import './styles/MusicPlayer.css'
-
-
-
+import './styles/ScreenSwitcher.css'
 import './styles/SongCard.css'
 
 

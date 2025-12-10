@@ -4,25 +4,29 @@ import { useRef } from "react";
 
 function MusicPlayer(){
 
- const audioRef = useRef(new Audio('public/hatsune_miku/demension_dream.mp3'));
-  const playAudio = () => {
-    audioRef.current.play();
+ const audio = useRef(new Audio('https://www.computerhope.com/jargon/m/example.mp3'));
+ 
+ 
+ 
+ 
+ const playAudio = () => {
+    audio.current.play();
   };
 
   const stopAudio = () => {
-    audioRef.current.pause();
+    audio.current.pause();
   };
 
 
     return (
     <div className="MusicPlayer">
          <p>Music Player</p>
+        
+         <img src="../public/furina_sil1.png"/> 
          <button onClick={stopAudio}>Prev</button>
          <button onClick={playAudio}>Play</button>
          <button onClick={stopAudio}>Pause</button>
          <button onClick={stopAudio}>Next</button>
-         <img src="../public/furina_sil1.png"/> 
-        
     </div>
     );
 }

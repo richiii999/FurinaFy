@@ -16,11 +16,16 @@ function ScreenSwitcher() {
   );
 
   return (
-    <div>
-      <button onClick={() => setActive("songs")}>Songs</button>
-      <button onClick={() => setActive("playlists")}>Playlists</button>
+    <div className="ScreenSwitcher">
+      <div className="barbar">
+      <button className="Screenbutton" onClick={() => setActive("songs")}>Songs</button>
+      <button className="Screenbutton" onClick={() => setActive("playlists")}>Playlists</button>
 
       <SearchBar mode={active} onSearch={(text) => setQuery(text)} />
+
+
+      </div>
+
 
       {active === "songs" && <SongsScreen items={filteredSongs} />}
       {active === "playlists" && <PlaylistScreen items={filteredPlaylists} />}

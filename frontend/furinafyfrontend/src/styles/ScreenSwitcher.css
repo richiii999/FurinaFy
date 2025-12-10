@@ -1,0 +1,37 @@
+.barbar{
+
+    display:flex;
+    margin-left: 5em;
+
+
+}
+
+
+
+.ScreenSwitcher .Screenbutton{
+
+    padding: 1em;
+    border-radius: 10%;
+    width: 6em;
+    margin: 1em;
+    margin-left: 2em;
+    position: relative;
+    color:gold;
+    grid-row: buttons;
+    background-color: blue;
+}
+
+
+.ScreenSwitcher .Screenbutton:hover{
+
+    padding: 1em;
+    border-radius: 10%;
+    width: 6em;
+    margin: 1em;
+    margin-left: 2em;
+    position: relative;
+    color:blue;
+    grid-row: buttons;
+    background-color: cyan;
+}
+
