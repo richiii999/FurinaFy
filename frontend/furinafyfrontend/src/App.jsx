@@ -10,8 +10,7 @@ function App() {
   
   return (
     <>
-        <SongCard/>
-        <SongCard name="Test Song" artist="Test Artist" length="1:23"/>
+       <MainScreen/>
     </>
   )
 }
