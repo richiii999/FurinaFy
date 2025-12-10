@@ -1,4 +1,4 @@
-.songCard{
+.songCard {
     border: 1px solid hsl(0, 0%, 80%);
     border-radius: 10px;
     box-shadow: 5px 5px 5px hsla(0, 0%, 0%, 0.5);
@@ -6,26 +6,28 @@
     margin: 10px;
     text-align: center;
     max-width: 400px;
-    display: inline-block;
-    justify-content: center;
-    align-items: center; 
 
     display: grid;
     place-items: center;
-    grid-template-columns: 128px 256px;
+
+    grid-template-columns: 50px 1fr; /* ← simple + responsive */
     grid-template-rows: 32px 32px 32px 32px;
+
     grid-template-areas: 
-    'songImageArea songTitleArea'
-    'songImageArea songLengthArea'
-    'songImageArea songArtistArea'
-    'songImageArea songButtonArea';
+      'songImageArea songTitleArea'
+      'songImageArea songLengthArea'
+      'songImageArea songArtistArea'
+      'songImageArea songButtonArea';
 }
 
-.songCard .songImage{
+.songCard .songImage {
     grid-area: songImageArea;
-
-    border-radius: 50%; /* Circular crop */
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
 }
+
 
 .songCard .songTitle{
     grid-area: songTitleArea;

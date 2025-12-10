@@ -1,22 +1,23 @@
-import SongCard from "./SongCard"; 
+import SongCard from "./SongCard";
 
-function SongsScreen({
-  items = [],
-  playlists = [],
-  onAddToPlaylist,
-  onDeleteSong,
-}) {
+function SongsScreen({ items = [], playlists = [], query = "", onAddToPlaylist, onDeleteSong }) {
+  const safeQuery = query.toLowerCase();
+
+  const filtered = items.filter(song =>
+    song.title?.toLowerCase().includes(safeQuery)
+  );
+
   return (
-    <div>
-      {items.length === 0 && <p>No songs yet. Click “Add Songs”.</p>}
-
-      {items.map((song) => (
+    <div className="songs-container">
+      {filtered.map(song => (
         <SongCard
-          key={song.id ?? song.name}
-          id={song.id}
-          name={song.name}
-          artist={song.artist}
+          key={song._id}
+          id={song._id}
+          name={song.title}
           length={song.length}
+          artist={song.artist || "Unknown Artist"}
+          picture={song.picture}
+          audio={song.song}
           playlists={playlists}
           onAddToPlaylist={onAddToPlaylist}
           onDeleteSong={onDeleteSong}

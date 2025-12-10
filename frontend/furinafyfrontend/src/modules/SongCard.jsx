@@ -1,45 +1,60 @@
 import { useState } from "react";
-import songImg from "../assets/kitty.jpg";
 
-function SongCard({ id, name, length, artist, playlists = [], onAddToPlaylist, onDeleteSong }) {
-  // song info
-  const songName = name || "Song Name";
+function SongCard({ //all the stuff that we got from the DB + stuff that we got originally (we can remove some stuff if we want but it works)
+  id, 
+  name, 
+  length, 
+  artist, 
+  picture, 
+  audio, 
+  playlists = [], 
+  onAddToPlaylist, 
+  onDeleteSong 
+}) {
+  //initialization of stuff
+  const songName = name || "Untitled Song";
   const songLength = length || "0:00";
-  const songArtist = artist || "Song Artist";
+  const songArtist = artist || "Unknown Artist";
 
   const [open, setOpen] = useState(false);
 
-  // filter playlists where this song is NOT already present
+  //checks to see if the song can be put in a playlist or if a playlist even exists
   const availablePlaylists = playlists.filter(
-    (pl) => !pl.songs.some((s) => s.name === songName)
+    (pl) => !pl.songs.some((s) => s.id === id)
   );
 
+  //helps add all the song information needs to the playlist
   const handleAddToPlaylist = (playlistId) => {
-  const songData = { id, name: songName, artist: songArtist, length: songLength };
-  onAddToPlaylist(songData, playlistId);
-  setOpen(false);
+    const songData = { id, name: songName, artist: songArtist, length: songLength, picture, audio };
+    onAddToPlaylist(songData, playlistId);
+    setOpen(false);
   };
-
 
   return (
     <div className="songCard">
-      <img className="songImage" src={songImg} alt="songImg" />
+
+      {/* show the actual picture from DB */}
+      {picture && <img className="songImage" src={picture} alt="song" />}
 
       <h2 className="songTitle">{songName}</h2>
       <p className="songLength">{songLength}</p>
       <p className="songArtist">{songArtist}</p>
 
-      <button className="songButton" onClick={() => setOpen((prev) => !prev)}>
-        Add to Playlist
-      </button>
+      {/* audio player */}
+      {audio && (
+        <audio controls src={audio}></audio>
+      )}
 
-      <button onClick={() => onDeleteSong(id)}>Delete Song</button>  
+      <button onClick={() => setOpen(prev => !prev)}>Add to Playlist</button>
+      <button onClick={() => onDeleteSong(id)}>Delete Song</button>
+
       {open && (
         <div>
           {availablePlaylists.length === 0 && (
-            <p>Already in a playlist or no playlists are available.</p>
+            <p>No available playlists.</p>
           )}
-
+          {/*all this code is doing is basically generating the checkboxs for you to actually add a song to an available playlist, if there is one
+          (it also prevents duplicate songs from entering a playlist)*/}
           {availablePlaylists.map((pl) => (
             <div key={pl.id}>
               <input
