@@ -3,7 +3,7 @@ CIS 435 Web Tech Project 3: **FurinyFy**, a music player
 
 # Setup
 
-Backend (Using MongoDB and MongoDB-Compass)
+**Backend** (Using MongoDB and MongoDB-Compass)
 - Start MongoDB
 - Start MongoDB Compass:
 - - '+ Create Database'
@@ -14,7 +14,7 @@ Backend (Using MongoDB and MongoDB-Compass)
 
 The database is now available at :3000
 
-Frontend 
+**Frontend**
 - navigate to FurinaFy/frontend/furinafyfrontend
 - run "npm run dev"
 
