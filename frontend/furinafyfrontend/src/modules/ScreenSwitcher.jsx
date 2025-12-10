@@ -1,17 +1,17 @@
 import { useState } from "react";
-import SongsScreen, { songsData } from "./SongsScreen";
-import PlaylistScreen, { playlistData } from "./PlaylistScreen";
+import SongsScreen, { songs } from "./SongsScreen";
+import PlaylistScreen, { playlists } from "./PlaylistScreen";
 import SearchBar from "./SearchBar";
 
 function ScreenSwitcher() {
   const [active, setActive] = useState("songs");
   const [query, setQuery] = useState("");
 
-  const filteredSongs = songsData.filter((song) =>
-    song.name.toLowerCase().includes(query.toLowerCase())
+  const filteredSongs = songs.filter((s1) =>
+    s1.name.toLowerCase().includes(query.toLowerCase())
   );
 
-  const filteredPlaylists = playlistData.filter((pl) =>
+  const filteredPlaylists = playlists.filter((pl) =>
     pl.name.toLowerCase().includes(query.toLowerCase())
   );
 

@@ -1,23 +1,35 @@
-import SongCard from "./SongCard"; 
-/*temp*/
-export const playlistData = [
-  { id: 1, name: "Test 1", artist:"Test Artist", length: "1:23" },
-  { id: 2, name: "Test 2", artist:"Test Artist", length: "1:23" },
-  { id: 3, name: "Test 3", artist:"Test Artist", length: "1:23" }
+import PlaylistCard from "./PlaylistCard";
+
+//dummy data, dunno wtf to do forr this atm but works  
+export const playlists = [
+  {
+    id: 1,
+    name: "My Playlist 1",
+    songs: [
+      { name: "Test 1", artist: "Test Artist", length: "1:23" },
+    ]
+  },
+  {
+    id: 2,
+    name: "Chill Mix",
+    songs: [
+      { name: "Lo-Fi Beat", artist: "Cool Guy", length: "2:10" },
+    ]
+  }
 ];
 
-function PlaylistScreen({ items }){
-    return (
-    <div>
-        {items.map((playlistData) => (
-        <SongCard
-          key={playlistData.id}
-          name={playlistData.name}
-          artist={playlistData.artist}
-          length={playlistData.length}
+function PlaylistScreen({ items }) {
+  return (
+    <div className="playlistScreen">
+      {items.map((playlist) => (
+        <PlaylistCard
+          key={playlist.id}
+          name={playlist.name}
+          songs={playlist.songs}
         />
       ))}
     </div>
-    );
+  );
 }
-export default PlaylistScreen
+
+export default PlaylistScreen;
