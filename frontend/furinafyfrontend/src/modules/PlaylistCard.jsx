@@ -5,7 +5,7 @@ function PlaylistCard({ name, songs }) {
     <div>
       <h2>{name}</h2>
 
-      <div className>
+      <div>
         {songs.length === 0 && <p>No songs yet.</p>}
 
         {songs.map((song, index) => (

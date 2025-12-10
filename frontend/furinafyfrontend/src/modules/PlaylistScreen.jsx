@@ -1,6 +1,6 @@
 import PlaylistCard from "./PlaylistCard";
 
-function PlaylistScreen({ items }) {
+function PlaylistScreen({ items, onDeletePlaylist }) {
   return (
     <div className="playlistScreen">
       {items.length === 0 && (
@@ -8,11 +8,13 @@ function PlaylistScreen({ items }) {
       )}
 
       {items.map((playlist) => (
-        <PlaylistCard
-          key={playlist.id}
-          name={playlist.name}
-          songs={playlist.songs}
-        />
+        <div>
+          <PlaylistCard
+            name={playlist.name}
+            songs={playlist.songs}
+          />
+          <button onClick={() => onDeletePlaylist(playlist.id)}>Delete Playlist</button>
+        </div>
       ))}
     </div>
   );

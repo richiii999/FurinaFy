@@ -55,6 +55,22 @@ function ScreenSwitcher() {
     );
   };
 
+  const deleteSong = (id) => {
+  setSongs((prev) => prev.filter((s) => s.id !== id));
+
+  // remove from all playlists
+  setPlaylists((prev) =>
+    prev.map((pl) => ({
+      ...pl,
+      songs: pl.songs.filter((s) => s.id !== id)
+    }))
+  );
+ };
+
+ const deletePlaylist = (id) => {
+  setPlaylists((prev) => prev.filter((pl) => pl.id !== id));
+ };
+
   const filteredSongs = songs.filter((s1) =>
     s1.name.toLowerCase().includes(query.toLowerCase())
   );
@@ -83,11 +99,15 @@ function ScreenSwitcher() {
           items={filteredSongs}
           playlists={playlists}
           onAddToPlaylist={onAddToPlaylist}
+          onDeleteSong={deleteSong}
         />
       )}
 
       {active === "playlists" && (
-        <PlaylistScreen items={filteredPlaylists} />
+        <PlaylistScreen
+        items={filteredPlaylists}
+        onDeletePlaylist={deletePlaylist}
+        />
       )}
     </div>
   );

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import songImg from "../assets/kitty.jpg";
 
-function SongCard({ name, length, artist, playlists = [], onAddToPlaylist }) {
+function SongCard({ id, name, length, artist, playlists = [], onAddToPlaylist, onDeleteSong }) {
   // song info
   const songName = name || "Song Name";
   const songLength = length || "0:00";
@@ -15,12 +15,11 @@ function SongCard({ name, length, artist, playlists = [], onAddToPlaylist }) {
   );
 
   const handleAddToPlaylist = (playlistId) => {
-    const songData = { name: songName, artist: songArtist, length: songLength };
-    if (onAddToPlaylist) {
-      onAddToPlaylist(songData, playlistId);
-    }
-    setOpen(false);
+  const songData = { id, name: songName, artist: songArtist, length: songLength };
+  onAddToPlaylist(songData, playlistId);
+  setOpen(false);
   };
+
 
   return (
     <div className="songCard">
@@ -34,6 +33,7 @@ function SongCard({ name, length, artist, playlists = [], onAddToPlaylist }) {
         Add to Playlist
       </button>
 
+      <button onClick={() => onDeleteSong(id)}>Delete Song</button>  
       {open && (
         <div>
           {availablePlaylists.length === 0 && (
