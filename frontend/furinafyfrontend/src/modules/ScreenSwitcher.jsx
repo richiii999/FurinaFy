@@ -1,41 +1,29 @@
 import { useState } from "react";
-import PlaylistScreen from "./PlaylistScreen";
-import SongsScreen from "./SongsScreen";
+import SongsScreen, { songsData } from "./SongsScreen";
+import PlaylistScreen, { playlistData } from "./PlaylistScreen";
 import SearchBar from "./SearchBar";
 
 function ScreenSwitcher() {
-  const [active, setActive] = useState("songs"); // "songs" or "playlists"
+  const [active, setActive] = useState("songs");
+  const [query, setQuery] = useState("");
 
-  const handleSearch = (query) => {
-    if (active === "songs") {
-      console.log("Searching songs:", query);
-    } else {
-      console.log("Searching playlists:", query);
-    }
-  };
+  const filteredSongs = songsData.filter((song) =>
+    song.name.toLowerCase().includes(query.toLowerCase())
+  );
+
+  const filteredPlaylists = playlistData.filter((pl) =>
+    pl.name.toLowerCase().includes(query.toLowerCase())
+  );
 
   return (
     <div>
-      
-      {/* buttons */}
-      <div style={{ marginBottom: 12 }}>
-        <button onClick={() => setActive("songs")}>Songs</button>
-        <button onClick={() => setActive("playlists")} style={{ marginLeft: 8 }}>
-          Playlists
-        </button>
-      </div>
+      <button onClick={() => setActive("songs")}>Songs</button>
+      <button onClick={() => setActive("playlists")}>Playlists</button>
 
-      {/* searchbar swaps automatically based on active screen */}
-      <SearchBar
-        mode={active}
-        onSearch={handleSearch}
-      />
+      <SearchBar mode={active} onSearch={(text) => setQuery(text)} />
 
-      {/* screen content */}
-      <div style={{ marginTop: 16 }}>
-        {active === "songs" && <SongsScreen />}
-        {active === "playlists" && <PlaylistScreen />}
-      </div>
+      {active === "songs" && <SongsScreen items={filteredSongs} />}
+      {active === "playlists" && <PlaylistScreen items={filteredPlaylists} />}
     </div>
   );
 }
