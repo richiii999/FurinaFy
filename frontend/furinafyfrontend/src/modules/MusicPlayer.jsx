@@ -7,7 +7,7 @@ import { useRef, useState, useEffect} from "react";
 /********https://www.youtube.com/watch?v=wxp4R_avfYw** */
 
 
-import "../styles/music2.css"
+import "../styles/MusicPlayer.css"
 
 
 
