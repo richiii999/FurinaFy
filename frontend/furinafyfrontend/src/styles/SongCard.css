@@ -23,7 +23,7 @@
     display: grid;
     place-items: center;
     grid-template-columns: 128px 150px;
-    grid-template-rows: 32px 32px 32px 32px;
+    grid-template-rows: 3em 32px 32px 32px;
 
     grid-template-areas: 
       'songImageArea songTitleArea'
@@ -52,8 +52,11 @@
 
 
 .songCard .songTitle{
+    margin-top: 2em;
     grid-area: songTitleArea;
   color: Cyan;
+  font-size:20px;
+  width: 8em;
  
 }
 .songCard:hover .songTitle{
@@ -65,7 +68,7 @@
 
 .songCard .songLength{
     grid-area: songLengthArea;
-
+    margin-top: 2em;
     color: gold;
 }
 .songCard:hover .songLength{
@@ -97,8 +100,34 @@
     transition: border-color 0.25s;
 
     grid-area: songButtonArea;
+    margin-top: 2em;
 }
 
+
+.songCard .songButton:hover{
+border-color: gold;
+}
+
+.songCard .deleteButton{
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em;
+    font-size: 1em;
+    font-weight: 500; 
+    font-family: inherit;
+      background-color: #00b4d8;
+    cursor: pointer;
+    transition: border-color 0.25s;
+
+}
+.songCard:hover .deleteButton{
+
+      background-color: #03045e;
+}
+.songCard:hover .deleteButton:hover{
+
+      border-color: gold;
+}
 
 
 
@@ -120,3 +149,8 @@
 
 }
 
+.play p{
+
+
+    margin-top: 2em;
+}

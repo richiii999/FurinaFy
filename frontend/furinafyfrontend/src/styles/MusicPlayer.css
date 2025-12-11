@@ -50,6 +50,7 @@ width: 10em;
 margin-left: 1em;
 margin-bottom: 2em;
 height: auto;
+border-radius: 50%;
 
 }
 input[type="range"]{

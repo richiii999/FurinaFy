@@ -9,7 +9,8 @@ function SongCard({ //all the stuff that we got from the DB + stuff that we got 
   audio, 
   playlists = [], 
   onAddToPlaylist, 
-  onDeleteSong 
+  onDeleteSong,
+  onClick
 }) {
   //initialization of stuff
   const songName = name || "Untitled Song";
@@ -31,7 +32,7 @@ function SongCard({ //all the stuff that we got from the DB + stuff that we got 
   };
 
   return (
-    <div className="songCard">
+    <div className="songCard" onClick={onClick}>
 
       {/* show the actual picture from DB */}
       {picture && <img className="songImage" src={picture} alt="song" />}
@@ -40,23 +41,39 @@ function SongCard({ //all the stuff that we got from the DB + stuff that we got 
       <p className="songLength">{songLength}</p>
       <p className="songArtist">{songArtist}</p>
 
-      {/* audio player */}
+
+
+
+      {/* audio player 
       {audio && (
         <audio controls src={audio}></audio>
       )}
+      */}
+      <button className="songButton" onClick={() => setOpen(prev => !prev)}>Add to Playlist</button>
+      <button className="deleteButton" onClick={() => onDeleteSong(id)}>Delete Song</button>
+       
+       
+       
+       
+        <div className="play">
+        {open && (
 
-      <button onClick={() => setOpen(prev => !prev)}>Add to Playlist</button>
-      <button onClick={() => onDeleteSong(id)}>Delete Song</button>
 
-      {open && (
-        <div>
+          <div>
+
+
           {availablePlaylists.length === 0 && (
             <p>No available playlists.</p>
           )}
+
+
           {/*all this code is doing is basically generating the checkboxs for you to actually add a song to an available playlist, if there is one
           (it also prevents duplicate songs from entering a playlist)*/}
+          
+          
+          
           {availablePlaylists.map((pl) => (
-            <div className="songDropdown" key={pl.id}>
+            <div  className="songDropdown" key={pl.id}>
               <input
                 type="checkbox"
                 id={`pl_${pl.id}_${songName}`}
@@ -68,7 +85,10 @@ function SongCard({ //all the stuff that we got from the DB + stuff that we got 
             </div>
           ))}
         </div>
-      )}
+          )}
+
+        </div>
+     
     </div>
   );
 }

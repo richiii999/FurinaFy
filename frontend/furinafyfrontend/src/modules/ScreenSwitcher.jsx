@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAllSongs, uploadSong } from "./axiom";
+import { getAllSongs } from "./axiom";
 import SongsScreen from "./SongsScreen";
 import PlaylistScreen from "./PlaylistScreen";
 import SearchBar from "./SearchBar";
@@ -160,17 +160,18 @@ async function askSongMetadata() {
   return (
     <div className="ScreenSwitcher">
       <div className="barbar">
-     <button onClick={startSongUpload}>Upload Song</button>
+      {/****<button onClick={startSongUpload}>Upload Song</button>****/}
 
-      <button onClick={() => setActive("songs")}>Songs</button>
-      <button onClick={() => setActive("playlists")}>Playlists</button>
-      </div>
+      <button className="Screenbutton" onClick={() => setActive("songs")}>Songs</button>
+      <button className="Screenbutton" onClick={() => setActive("playlists")}>Playlists</button>
+      
 
       <SearchBar mode={active} onSearch={setQuery
         /*all this line does is sets the specific screen/search bar to the corresponding playlists or song screen*/
       } />
+      </div>
 
-      {active === "songs" && ( //song info
+     {active === "songs" && ( //song info
         <SongsScreen
           items={filteredSongs}
           playlists={playlists}
@@ -187,8 +188,11 @@ async function askSongMetadata() {
           onAddToPlaylist={onAddToPlaylist}
           onDeleteSong={deleteSong}
           onCreatePlaylist={createPlaylist}
+          onRemoveFromPlaylist={removeSongFromPlaylist}
         />
       )}
+
+
     </div>
   );
 }

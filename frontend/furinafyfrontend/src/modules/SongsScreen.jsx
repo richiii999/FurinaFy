@@ -1,4 +1,8 @@
 import SongCard from "./SongCard";
+import MusicPlayer from "./MusicPlayer";
+import{ useState} from "react";
+
+
 
 function SongsScreen({ items = [], playlists = [], query = "", onAddToPlaylist, onDeleteSong }) {
   const safeQuery = query.toLowerCase();
@@ -7,7 +11,28 @@ function SongsScreen({ items = [], playlists = [], query = "", onAddToPlaylist, 
     song.title?.toLowerCase().includes(safeQuery)
   );
 
+
+/***************HANDLES THE PLAYER AND THE SONG IF CLICKED******* */
+const [curr,setcurr] = useState(null);
+
+
+function handleSongClick(song){
+
+setcurr({
+
+audioSrc:song.song,
+title: song.title,
+imagine:song.picture
+
+});
+}
+
+/***************************** */
+
+
+
   return (
+    <div>
     <div className={"SongsScreen"}>
      
      {items.map((song) => (
@@ -22,9 +47,18 @@ function SongsScreen({ items = [], playlists = [], query = "", onAddToPlaylist, 
           playlists={playlists}
           onAddToPlaylist={onAddToPlaylist}
           onDeleteSong={onDeleteSong}
+
+
+          onClick={()=> handleSongClick(song)}
         />
       ))}
+
     </div>
+
+
+    <MusicPlayer audioSrc={curr?.audioSrc} title={curr?.title} imagine={curr?.imagine}></MusicPlayer>
+
+  </div>
   );
 }
 

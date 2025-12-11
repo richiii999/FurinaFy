@@ -4,7 +4,7 @@ import './styles/App.css'
 import './styles/MusicPlayer.css'
 import './styles/ScreenSwitcher.css'
 import './styles/SongCard.css'
-
+import './styles/PlaylistScreen.css'
 
 function App() {
   const [count, setCount] = useState(0)

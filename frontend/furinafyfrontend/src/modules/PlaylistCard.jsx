@@ -1,6 +1,10 @@
 import SongCard from "./SongCard";
 
 function PlaylistCard({ name, songs, playlists, onAddToPlaylist, onDeleteSong }) {
+ 
+ 
+ 
+ 
   return (
     <div>
       <h2>{name}</h2>

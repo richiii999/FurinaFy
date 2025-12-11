@@ -1,24 +1,6 @@
-<<<<<<< HEAD
-import SongCard from "./SongCard"; 
-/*temp*/
-export const playlistData = [
-  { id: 1, name: "playlist", artist:"Test Artist", length: "1:23" },
-  { id: 2, name: "Test 2", artist:"Test Artist", length: "1:23" },
-  { id: 3, name: "Test 3", artist:"Test Artist", length: "1:23" }
-];
-
-function PlaylistScreen({ items }){
-    return (
-    <div className="PlaylistScreen">
-        {items.map((playlistData) => (
-        <SongCard
-          key={playlistData.id}
-          name={playlistData.name}
-          artist={playlistData.artist}
-          length={playlistData.length}
-        />
-=======
 import PlaylistCard from "./PlaylistCard";
+
+
 
 function PlaylistScreen({ //pass in all the items from screenswitcher for playlistscreen to utilize
   items, 
@@ -31,7 +13,7 @@ function PlaylistScreen({ //pass in all the items from screenswitcher for playli
     <div className="playlistScreen">
 
       {/*create a playlist*/}
-      <button onClick={onCreatePlaylist}>+ Create Playlist</button>
+      <button  className="Screenbutton"onClick={onCreatePlaylist}>+ Create Playlist</button>
 
       {/*checks to see if theres no playlists and prompts for the user to make one*/}
       {items.length === 0 && (
@@ -53,7 +35,6 @@ function PlaylistScreen({ //pass in all the items from screenswitcher for playli
             Delete Playlist
           </button>
         </div>
->>>>>>> alitest
       ))}
     </div>
   );
