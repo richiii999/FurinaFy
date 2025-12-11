@@ -50,7 +50,7 @@ function SongCard({ //all the stuff that we got from the DB + stuff that we got 
       <button onClick={() => setOpen(prev => !prev)}>Add to Playlist</button>
       <button onClick={() => onDeleteSong(id)}>Delete Song</button>
       
-      {playlistId && onRemoveFromPlaylist && (
+      {playlistId && onRemoveFromPlaylist && ( //this only allows it to show on the playlist screen 
       <button onClick={() => onRemoveFromPlaylist(id, playlistId)}>Remove from Playlist</button>
       )}
 

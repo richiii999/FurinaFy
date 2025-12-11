@@ -171,8 +171,10 @@ async function askSongMetadata() {
 
   return (
     <div>
-     <button onClick={startSongUpload}>Upload Song</button>
-
+      {active === "songs" &&
+      <button onClick={startSongUpload}>Upload Song</button>
+      }
+      
       <button onClick={() => setActive("songs")}>Songs</button>
       <button onClick={() => setActive("playlists")}>Playlists</button>
 

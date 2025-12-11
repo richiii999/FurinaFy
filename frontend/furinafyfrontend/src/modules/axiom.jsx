@@ -23,3 +23,15 @@ export async function uploadSong(newSong) {
     throw err;
   }
 }
+
+//delete song from DB
+export async function deleteSong(id) {
+  try {
+  const res = await axios.delete(/*need caleb to figure out the route */);
+  return res.data; 
+  } catch (err) {
+    console.error("Axios delete error:", err);
+    throw new Error("Failed to delete song");
+  }
+  
+}
