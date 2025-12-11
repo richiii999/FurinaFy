@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAllSongs, uploadSong } from "./axiom";
+import { getAllSongs, uploadSong, deleteSongFromDB } from "./axiom";
 import SongsScreen from "./SongsScreen";
 import PlaylistScreen from "./PlaylistScreen";
 import SearchBar from "./SearchBar";
@@ -55,16 +55,31 @@ function ScreenSwitcher() {
     );
   };
 
-  //delete a song from songs or playlists (refresh to get the song back)
-  const deleteSong = (id) => {
-  setSongs(prev => prev.filter(s => s.id !== id && s._id !== id));
-  setPlaylists(prev =>
-     prev.map(pl => ({
-       ...pl,
-       songs: pl.songs.filter(s => s.id !== id && s._id !== id)
-     }))
-   );
- };
+  //delete a song from songs or playlists (deletes from DB)
+  const deleteSong = async (id) => {
+    console.log(id)
+  try {
+    //delete the song from DB first
+    await deleteSongFromDB(id); 
+
+    //remove from songs screen
+    setSongs(prev => prev.filter(s => s.id !== id && s._id !== id));
+
+    //remove from all playlists
+    setPlaylists(prev =>
+      prev.map(pl => ({
+        ...pl,
+        songs: pl.songs.filter(s => (s.id || s._id) !== id)
+      }))
+    );
+
+    alert("Song deleted.");
+  } catch (err) {
+    console.error(err);
+    alert("Failed to delete song from database.");
+  }
+};
+
 
 
   // remove a song from only ONE playlist
@@ -174,7 +189,7 @@ async function askSongMetadata() {
       {active === "songs" &&
       <button onClick={startSongUpload}>Upload Song</button>
       }
-      
+
       <button onClick={() => setActive("songs")}>Songs</button>
       <button onClick={() => setActive("playlists")}>Playlists</button>
 

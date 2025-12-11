@@ -25,13 +25,12 @@ export async function uploadSong(newSong) {
 }
 
 //delete song from DB
-export async function deleteSong(id) {
+export async function deleteSongFromDB(id) {
   try {
-  const res = await axios.delete(/*need caleb to figure out the route */);
-  return res.data; 
+    const res = await axios.delete(`http://localhost:3000/song/${id}`);
+    return res.data;
   } catch (err) {
     console.error("Axios delete error:", err);
     throw new Error("Failed to delete song");
   }
-  
 }
