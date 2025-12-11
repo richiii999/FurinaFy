@@ -30,6 +30,19 @@ app.post('/song', async (req,res) => {
     }
 });
 
+app.delete('/song/:_id', async (req,res) =>  {
+    try{
+
+        //add pull all when add playlists
+       const del =  await Song.deleteOne(req.params);
+       res.status(200).json(del);
+    }
+    catch(error){
+        console.log(error.message);
+        res.status(500).json({message: error.message});
+    }
+})
+
 //connect to mongodb (may need to use async)
 mongoose.connect('mongodb://127.0.0.1:27017/Music_Player')
     .then(() => {
