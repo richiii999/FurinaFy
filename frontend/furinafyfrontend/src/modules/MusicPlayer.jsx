@@ -37,7 +37,7 @@ setDuration(audioRef.current.duration);
 
 };
 
-
+/************************************************************************ */
 
 /****************button handlers below here**************************** */
 const handlePlay = () => {
@@ -64,6 +64,27 @@ else {
 
     
 }
+/****************************IS WHERE THE GOPREV AND GONEXT BUTTONS FUNCTIONS SHOULD BE *************************************** */
+
+const handlePrev = () => {
+
+   MusicPlayer('../public/hatsune_miku/[60fps Full風] The disappearance of Hatsune Miku -DEAD END-初音ミクの消失 DIVA Dreamy theater English Romaji [5qkTpJAhywg].mp3',"here","../public/furina_sil1.png")
+   
+   audioRef.current.play();
+   setIsPlaying(true);
+};
+
+
+
+const handleNext = () => {
+
+    /****UPDATE FROM AUDIO REF */
+    audioRef.current.play();
+    setIsPlaying(true);
+};
+
+
+
 /********************** */
 
 
@@ -98,17 +119,12 @@ else {
 
 
 
-
-
-
-
-
-
 return(
 
 <div className='helo'> 
 
 <div className="card stuff">
+
 <img src={imagine}/> 
 <img src="../public/furina_sil1.png"/> 
 <div className="card"> song: {title}</div>
@@ -126,6 +142,9 @@ onChange={handleSeek}
 
 <audio ref={audioRef} src={audioSrc}></audio>
 
+
+
+{/*************the numbers below image */}
 <div className='track-duration'>
 
 <p> {currentTime}</p>
@@ -133,8 +152,16 @@ onChange={handleSeek}
 
 </div>
 
+{/*******************************GO PREV AND GO NEXT ARE NOT WORKING I PLANNED FOR THEM TO BE RECURSIVE *****/}
 
 
+<button className="playbutton" onClick={handlePrev}>
+    <span> {/***idk what span does it's just there in the totorial */}
+        {
+       <img src="./prev.png"></img>
+        }
+    </span>
+</button>
 <button className="playbutton" onClick={handlePlayPause}>
     <span> {/***idk what span does it's just there in the totorial */}
         {
@@ -143,6 +170,12 @@ onChange={handleSeek}
         }
     </span>
 </button>
+<button className="playbutton" onClick={handleNext}>
+    <span> {/***idk what span does it's just there in the totorial */}
+     <img src="./next.png"></img>
+    </span>
+</button>
+
 
 
 
