@@ -24,11 +24,12 @@
     place-items: center;
     grid-template-columns: 128px 150px;
     grid-template-rows: 32px 32px 32px 32px;
+
     grid-template-areas: 
-    'songImageArea songTitleArea'
-    'songImageArea songLengthArea'
-    'songImageArea songArtistArea'
-    'songImageArea songButtonArea';
+      'songImageArea songTitleArea'
+      'songImageArea songLengthArea'
+      'songImageArea songArtistArea'
+      'songImageArea songButtonArea';
 }
 
 
@@ -48,6 +49,7 @@
     border-radius: 50%; /* Circular crop */
     
 }
+
 
 .songCard .songTitle{
     grid-area: songTitleArea;

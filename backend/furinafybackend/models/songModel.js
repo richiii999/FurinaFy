@@ -5,6 +5,13 @@ const songSchema = mongoose.Schema({
         type : String,
         required : [true, "Please enter a title"]
     },
+<<<<<<< HEAD
+=======
+    artist :{
+        type : String,
+        required : [true, "Please enter artist"]
+    },
+>>>>>>> alitest
     length : {
         type : String,
         required : [true, "Please enter a length"]

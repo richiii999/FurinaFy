@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import SongCard from "./SongCard"; 
 /*temp*/
 export const playlistData = [
@@ -16,8 +17,48 @@ function PlaylistScreen({ items }){
           artist={playlistData.artist}
           length={playlistData.length}
         />
+=======
+import PlaylistCard from "./PlaylistCard";
+
+function PlaylistScreen({ //pass in all the items from screenswitcher for playlistscreen to utilize
+  items, 
+  onDeletePlaylist, 
+  onAddToPlaylist, 
+  onDeleteSong,
+  onCreatePlaylist   
+}) {
+  return (
+    <div className="playlistScreen">
+
+      {/*create a playlist*/}
+      <button onClick={onCreatePlaylist}>+ Create Playlist</button>
+
+      {/*checks to see if theres no playlists and prompts for the user to make one*/}
+      {items.length === 0 && (
+        <p>No playlists yet. Click “Create Playlist”.</p>
+      )}
+
+      {items.map((playlist) => ( //prints out the actual playlist card to the screen 
+        <div key={playlist.id}> 
+          <PlaylistCard
+            name={playlist.name}
+            songs={playlist.songs}
+            playlists={items}
+            onAddToPlaylist={onAddToPlaylist}
+            onDeleteSong={onDeleteSong}
+          />
+
+          <button onClick={() => onDeletePlaylist(playlist.id)}>
+            {/*delete playlist button that actually deletes a playlist*/}
+            Delete Playlist
+          </button>
+        </div>
+>>>>>>> alitest
       ))}
     </div>
-    );
+  );
 }
-export default PlaylistScreen
+
+export default PlaylistScreen;
+
+

@@ -1,26 +1,31 @@
 import SongCard from "./SongCard";
-/* duummy data */
-export const songsData = [
-  { id: 1, name: "Test 1", artist:"Test Artist", length: "1:23" },
-  { id: 2, name: "Test 2", artist:"Test Artist", length: "1:23" },
-  { id: 3, name: "Test 3", artist:"Test Artist", length: "1:23" }
-];
 
-function SongsScreen({ items }) {
+function SongsScreen({ items = [], playlists = [], query = "", onAddToPlaylist, onDeleteSong }) {
+  const safeQuery = query.toLowerCase();
+
+  const filtered = items.filter(song =>
+    song.title?.toLowerCase().includes(safeQuery)
+  );
+
   return (
     <div className={"SongsScreen"}>
      
      {items.map((song) => (
         <SongCard
-          key={song.id}
-          name={song.name}
-          artist={song.artist}
+          key={song._id}
+          id={song._id}
+          name={song.title}
           length={song.length}
+          artist={song.artist || "Unknown Artist"}
+          picture={song.picture}
+          audio={song.song}
+          playlists={playlists}
+          onAddToPlaylist={onAddToPlaylist}
+          onDeleteSong={onDeleteSong}
         />
       ))}
     </div>
   );
 }
 
-export default SongsScreen
-
+export default SongsScreen;
