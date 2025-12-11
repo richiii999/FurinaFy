@@ -5,6 +5,10 @@ const songSchema = mongoose.Schema({
         type : String,
         required : [true, "Please enter a title"]
     },
+    artist :{
+        type : String,
+        required : [true, "Please enter artist"]
+    },
     length : {
         type : String,
         required : [true, "Please enter a length"]
