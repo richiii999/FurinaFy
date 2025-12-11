@@ -7,7 +7,8 @@ function PlaylistScreen({
   onAddToPlaylist,
   onDeleteSong,
   onCreatePlaylist,
-  onRemoveFromPlaylist
+  onRemoveFromPlaylist,
+  onUpdatePlaylist
 }) {
   return (
     <div className="playlistScreen">
@@ -18,26 +19,39 @@ function PlaylistScreen({
         <p>No playlists yet. Click “Create Playlist”.</p>
       )}
 
-      {items.map((playlist) => (
-        <div key={playlist._id}> 
-          <PlaylistCard
-            name={playlist.name}
-            songs={playlist.songs
-            .map(id => songs.find(song => String(song._id) === String(id)))
-           .filter(Boolean)
-            }
-            playlists={items}
-            onAddToPlaylist={onAddToPlaylist}
-            onDeleteSong={onDeleteSong}
-            onRemoveFromPlaylist={onRemoveFromPlaylist}
-            playlistId={playlist._id}
-          />
+{items.map((playlist) => (
+  <div key={playlist._id}> 
+    <PlaylistCard
+      name={playlist.name}
+      songs={(playlist.songs || [])
+        .map(id => songs.find(song => String(song._id) === String(id)))
+        .filter(Boolean)
+      }
+      playlists={items}
+      onAddToPlaylist={onAddToPlaylist}
+      onDeleteSong={onDeleteSong}
+      onRemoveFromPlaylist={onRemoveFromPlaylist}
+      playlistId={playlist._id}
+    />
 
-          <button onClick={() => onDeletePlaylist(playlist._id)}>
-            Delete Playlist
-          </button>
-        </div>
-      ))}
+    <button onClick={() => onDeletePlaylist(playlist._id)}>
+      Delete Playlist
+    </button>
+
+    <button
+  onClick={() =>
+    onUpdatePlaylist(
+      playlist._id,
+      (items.find(p => p._id === playlist._id)?.songs || [])
+    )
+  }
+>
+  Update Playlist
+</button>
+
+  </div>
+))}
+
     </div>
   );
 }

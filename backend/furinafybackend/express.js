@@ -46,6 +46,7 @@ app.delete('/song/:_id', async (req,res) =>  {
 
         //add pull all when add playlists
        const del =  await Song.deleteOne(req.params);
+       const delPlay = await Playlist.updateMany({},{$pull : {songs : req.params['_id']}});
        res.status(200).json(del);
     }
     catch(error){
@@ -80,6 +81,17 @@ app.patch('/updateplaylist/:_id', async (req,res) => {
     try{
         const playlist = await Playlist.updateOne(req.params, req.body);
         res.status(200).json(playlist);
+    }
+    catch(error){
+        console.log(error.message);
+        res.status(500).json({message : error.message});
+    }
+});
+
+app.delete('/deleteplaylist/:_id', async (req,res) => {
+    try {
+        const response = await Playlist.deleteOne(req.params);
+        res.status(200).json(response);
     }
     catch(error){
         console.log(error.message);

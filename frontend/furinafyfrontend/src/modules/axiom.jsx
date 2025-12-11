@@ -39,3 +39,38 @@ export async function getAllPlaylists() {
   const res = await axios.get("http://localhost:3000/allplaylists");
   return res.data;
 }
+
+export async function createPlaylistInDB(newPlaylist) {
+  try {
+    const res = await axios.post(
+      "http://localhost:3000/addplaylist",
+      newPlaylist,
+      { headers: { "Content-Type": "application/json" } }
+    );
+    return res.data; 
+  } catch (err) {
+    console.error("Failed to create playlist:", err);
+    throw err;
+  }
+}
+
+//update the playlist
+export async function updatePlaylistInDB(playlistId, updatedData) {
+  try {
+    const res = await axios.patch(
+      `http://localhost:3000/updateplaylist/${playlistId}`,
+      updatedData,
+      { headers: { "Content-Type": "application/json" } }
+    );
+    return res.data; 
+  } catch (err) {
+    console.error("Failed to update playlist:", err);
+    throw err;
+  }
+}
+
+export async function deletePlaylistFromDB(id) {
+  const res = await axios.delete(`http://localhost:3000/deleteplaylist/${id}`);
+  return res.data;
+}
+

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAllSongs, uploadSong, deleteSongFromDB, getAllPlaylists } from "./axiom";
+import { getAllSongs, uploadSong, deleteSongFromDB, getAllPlaylists, createPlaylistInDB, updatePlaylistInDB, deletePlaylistFromDB } from "./axiom";
 import SongsScreen from "./SongsScreen";
 import PlaylistScreen from "./PlaylistScreen";
 import SearchBar from "./SearchBar";
@@ -33,35 +33,78 @@ useEffect(() => {
 }, []);
 
 
-  // create a playlist 
-  const createPlaylist = () => {
-    const name = prompt("Enter playlist name:");
-    if (!name) return;
+  // create a playlist and send it to the website/DB
+const createPlaylist = async () => {
+  const name = prompt("Enter playlist name:");
+  if (!name) return;
 
+  try {
     const newPlaylist = {
-      id: playlists.length + 1,
       name,
-      songs: []
+      songs: [] 
     };
 
-    setPlaylists(prev => [...prev, newPlaylist]);
-  };
+    const createdPlaylist = await createPlaylistInDB(newPlaylist);
+
+    setPlaylists(prev => [...prev, createdPlaylist]);
+
+    alert("Playlist created!");
+
+  } catch (err) {
+    console.error(err);
+    alert("Failed to create playlist in DB.");
+  }
+};
   
-  //delete a playlist
-  const deletePlaylist = (id) => {
-    setPlaylists(prev => prev.filter(pl => pl.id !== id));
-  };
+  //delete a playlist and update website/DB
+  const deletePlaylist = async (playlistId) => {
+    console.log(playlistId)
+  try {
+    await deletePlaylistFromDB(playlistId);
+
+    setPlaylists(prev =>
+      prev.filter(pl => String(pl._id) !== String(playlistId))
+    );
+
+    alert("Playlist deleted!");
+  } catch (err) {
+    console.error(err);
+    alert("Failed to delete playlist.");
+  }
+};
 
   //add a song to a playlist
   const onAddToPlaylist = (song, playlistId) => {
-    setPlaylists(prev =>
-      prev.map(pl =>
-        pl.id === playlistId
-          ? { ...pl, songs: [...pl.songs, song] }
-          : pl
-      )
+  setPlaylists(prev =>
+    prev.map(pl =>
+      pl._id === playlistId
+        ? { ...pl, songs: [...pl.songs, song._id] }
+        : pl
+    )
+  );
+};
+
+//update a playlist and gets sent to DB to store
+const onUpdatePlaylist = async (playlistId, songsArray) => {
+  try {
+    await updatePlaylistInDB(playlistId, { songs: songsArray });
+
+    const freshPlaylists = await getAllPlaylists();
+
+    setPlaylists(
+      freshPlaylists.map(pl => ({
+        ...pl,
+        songs: Array.isArray(pl.songs) ? pl.songs : []
+      }))
     );
-  };
+
+    alert("Playlist updated!");
+  } catch (err) {
+    console.error(err);
+    alert("Failed to update playlist in DB.");
+  }
+};
+
 
   //delete a song from songs or playlists (deletes from DB)
   const deleteSong = async (id) => {
@@ -93,13 +136,19 @@ useEffect(() => {
   // remove a song from only ONE playlist
   const removeSongFromPlaylist = (songId, playlistId) => {
   setPlaylists(prev =>
-      prev.map(pl =>
-        pl.id === playlistId
-          ? { ...pl, songs: pl.songs.filter(s => s.id !== songId && s._id !== songId) }
-          : pl
-      )
-    );
-  };
+    prev.map(pl =>
+      pl._id === playlistId
+        ? {
+            ...pl,
+            songs: pl.songs.filter(id =>
+              String(id) !== String(songId)
+            )
+          }
+        : pl
+    )
+  );
+};
+
 
   //file converter
   function fileToBase64(file) {
@@ -224,6 +273,7 @@ async function askSongMetadata() {
           onDeleteSong={deleteSong}
           onCreatePlaylist={createPlaylist}
           onRemoveFromPlaylist={removeSongFromPlaylist}
+          onUpdatePlaylist={onUpdatePlaylist}
         />
       )}
     </div>
