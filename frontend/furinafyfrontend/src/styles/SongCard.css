@@ -129,28 +129,27 @@ border-color: gold;
       border-color: gold;
 }
 
-
-
 .songDropdown {
-   
-   display :none;/* Changed on hover */
-
-  
-    background: transparent;
-    min-width: 200px;
-    z-index: 1;
-}
-
-.songButton:hover *.songDropdown{  
-
-
-    display:block;
-   visibility: visible;
+    color: white;
+   margin-top: 3em;
+    position: relative;
+    padding: 1em;
+    background-color: #00b4d8;
+    border-radius: 10%;
+    min-width: 7em;
+   margin-bottom: 2em;
+   margin-left: 1em;
 
 }
+.songCard:hover .songDropdown{
+
+     background-color: #03045e;
+}
+
+
 
 .play p{
 
-
+   
     margin-top: 2em;
 }

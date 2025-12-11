@@ -56,6 +56,11 @@ function SongCard({ //all the stuff that we got from the DB + stuff that we got 
        
        
         <div className="play">
+
+          <div className="songDropdown">
+
+
+       
         {open && (
 
 
@@ -71,21 +76,37 @@ function SongCard({ //all the stuff that we got from the DB + stuff that we got 
           (it also prevents duplicate songs from entering a playlist)*/}
           
           
-          
+      
           {availablePlaylists.map((pl) => (
-            <div  className="songDropdown" key={pl.id}>
+            <div   key={pl.id}>
               <input
-                type="checkbox"
+                type="checkbox" 
+                
                 id={`pl_${pl.id}_${songName}`}
                 onChange={() => handleAddToPlaylist(pl.id)}
               />
+
+              {/**************************** */}
+              <span class="checkmark"></span>
+              {/***************************** */}
+
+
               <label htmlFor={`pl_${pl.id}_${songName}`}>
                 Add to {pl.name}
               </label>
             </div>
           ))}
+          
+
+
+
+
         </div>
           )}
+
+
+               </div>
+
 
         </div>
      

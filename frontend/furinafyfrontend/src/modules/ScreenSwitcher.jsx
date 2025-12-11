@@ -45,7 +45,7 @@ function ScreenSwitcher() {
   };
 
   //add a song to a playlist
-  const onAddToPlaylist = (song, playlistId) => {
+ const onAddToPlaylist = (song, playlistId) => {
     setPlaylists(prev =>
       prev.map(pl =>
         pl.id === playlistId
@@ -54,18 +54,28 @@ function ScreenSwitcher() {
       )
     );
   };
-
   //delete a song from songs or playlists (refresh to get the song back)
   const deleteSong = (id) => {
-    setSongs(prev => prev.filter(s => s._id !== id));
-    setPlaylists(prev =>
-      prev.map(pl => ({
-        ...pl,
-        songs: pl.songs.filter(s => s._id !== id)
-      }))
+  setSongs(prev => prev.filter(s => s.id !== id && s._id !== id));
+  setPlaylists(prev =>
+     prev.map(pl => ({
+       ...pl,
+       songs: pl.songs.filter(s => s.id !== id && s._id !== id)
+     }))
+   );
+ };
+
+
+  // remove a song from only ONE playlist
+  const removeSongFromPlaylist = (songId, playlistId) => {
+  setPlaylists(prev =>
+      prev.map(pl =>
+        pl.id === playlistId
+          ? { ...pl, songs: pl.songs.filter(s => s.id !== songId && s._id !== songId) }
+          : pl
+      )
     );
   };
-
   //file converter
   function fileToBase64(file) {
     return new Promise((resolve, reject) => {
@@ -156,6 +166,7 @@ async function askSongMetadata() {
   const filteredPlaylists = playlists.filter(pl =>
     pl.name?.toLowerCase().includes(query.toLowerCase())
   );
+
 
   return (
     <div className="ScreenSwitcher">
