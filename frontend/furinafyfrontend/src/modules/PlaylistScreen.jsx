@@ -5,7 +5,8 @@ function PlaylistScreen({ //pass in all the items from screenswitcher for playli
   onDeletePlaylist, 
   onAddToPlaylist, 
   onDeleteSong,
-  onCreatePlaylist   
+  onCreatePlaylist,
+  onRemoveFromPlaylist   
 }) {
   return (
     <div className="playlistScreen">
@@ -26,6 +27,8 @@ function PlaylistScreen({ //pass in all the items from screenswitcher for playli
             playlists={items}
             onAddToPlaylist={onAddToPlaylist}
             onDeleteSong={onDeleteSong}
+            onRemoveFromPlaylist={onRemoveFromPlaylist} 
+            playlistId={playlist.id}
           />
 
           <button onClick={() => onDeletePlaylist(playlist.id)}>

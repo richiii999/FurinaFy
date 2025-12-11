@@ -57,12 +57,24 @@ function ScreenSwitcher() {
 
   //delete a song from songs or playlists (refresh to get the song back)
   const deleteSong = (id) => {
-    setSongs(prev => prev.filter(s => s._id !== id));
-    setPlaylists(prev =>
-      prev.map(pl => ({
-        ...pl,
-        songs: pl.songs.filter(s => s._id !== id)
-      }))
+  setSongs(prev => prev.filter(s => s.id !== id && s._id !== id));
+  setPlaylists(prev =>
+     prev.map(pl => ({
+       ...pl,
+       songs: pl.songs.filter(s => s.id !== id && s._id !== id)
+     }))
+   );
+ };
+
+
+  // remove a song from only ONE playlist
+  const removeSongFromPlaylist = (songId, playlistId) => {
+  setPlaylists(prev =>
+      prev.map(pl =>
+        pl.id === playlistId
+          ? { ...pl, songs: pl.songs.filter(s => s.id !== songId && s._id !== songId) }
+          : pl
+      )
     );
   };
 
@@ -185,6 +197,7 @@ async function askSongMetadata() {
           onAddToPlaylist={onAddToPlaylist}
           onDeleteSong={deleteSong}
           onCreatePlaylist={createPlaylist}
+          onRemoveFromPlaylist={removeSongFromPlaylist}
         />
       )}
     </div>

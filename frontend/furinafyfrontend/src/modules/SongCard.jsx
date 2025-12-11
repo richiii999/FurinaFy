@@ -9,7 +9,9 @@ function SongCard({ //all the stuff that we got from the DB + stuff that we got 
   audio, 
   playlists = [], 
   onAddToPlaylist, 
-  onDeleteSong 
+  onDeleteSong,
+  onRemoveFromPlaylist,
+  playlistId
 }) {
   //initialization of stuff
   const songName = name || "Untitled Song";
@@ -47,6 +49,11 @@ function SongCard({ //all the stuff that we got from the DB + stuff that we got 
 
       <button onClick={() => setOpen(prev => !prev)}>Add to Playlist</button>
       <button onClick={() => onDeleteSong(id)}>Delete Song</button>
+      
+      {playlistId && onRemoveFromPlaylist && (
+      <button onClick={() => onRemoveFromPlaylist(id, playlistId)}>Remove from Playlist</button>
+      )}
+
 
       {open && (
         <div>
