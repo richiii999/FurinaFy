@@ -16,7 +16,7 @@
 
      background-color: #03045e;
      backdrop-filter: blur(40px);
-
+    
 
     
 
@@ -98,13 +98,14 @@
       background-color: #00b4d8;
     cursor: pointer;
     transition: border-color 0.25s;
-
+    color: gold;
     grid-area: songButtonArea;
     margin-top: 2em;
 }
 
 
 .songCard .songButton:hover{
+color: blue;
 border-color: gold;
 }
 
@@ -118,19 +119,21 @@ border-color: gold;
       background-color: #00b4d8;
     cursor: pointer;
     transition: border-color 0.25s;
+      color: gold;
 
 }
 .songCard:hover .deleteButton{
 
       background-color: #03045e;
+      
 }
 .songCard:hover .deleteButton:hover{
-
+  color: blue;
       border-color: gold;
 }
 
 .songDropdown {
-    color: white;
+    color: gold;
    margin-top: 3em;
     position: relative;
     padding: 1em;

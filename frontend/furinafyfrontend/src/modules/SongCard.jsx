@@ -10,6 +10,8 @@ function SongCard({ //all the stuff that we got from the DB + stuff that we got 
   playlists = [], 
   onAddToPlaylist, 
   onDeleteSong,
+  onRemoveFromPlaylist,
+  playlistId,
   onClick
 }) {
   //initialization of stuff
@@ -52,7 +54,10 @@ function SongCard({ //all the stuff that we got from the DB + stuff that we got 
       <button className="songButton" onClick={() => setOpen(prev => !prev)}>Add to Playlist</button>
       <button className="deleteButton" onClick={() => onDeleteSong(id)}>Delete Song</button>
        
-       
+      {playlistId && onRemoveFromPlaylist && ( //this only allows it to show on the playlist screen 
+      <button onClick={() => onRemoveFromPlaylist(id, playlistId)}>Remove from Playlist</button>
+      )}
+
        
        
         <div className="play">

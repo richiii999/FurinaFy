@@ -3,7 +3,7 @@ import SearchBar from "./SearchBar";
 import SongsScreen from "./SongsScreen";
 import PlaylistScreen from "./PlaylistScreen";
 import ScreenSwitcher from "./ScreenSwitcher";
-import MusicPlayer from "./MusicPlayer";
+
 
 
 function MainScreen() {

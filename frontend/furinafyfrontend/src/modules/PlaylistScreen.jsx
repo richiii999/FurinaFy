@@ -30,7 +30,7 @@ function PlaylistScreen({ //pass in all the items from screenswitcher for playli
             onDeleteSong={onDeleteSong}
           />
 
-          <button onClick={() => onDeletePlaylist(playlist.id)}>
+          <button className="delete_playlist" onClick={() => onDeletePlaylist(playlist.id)}>
             {/*delete playlist button that actually deletes a playlist*/}
             Delete Playlist
           </button>

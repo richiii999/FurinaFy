@@ -1,21 +1,18 @@
 import SongCard from "./SongCard";
 
-function PlaylistCard({ name, songs, playlists, onAddToPlaylist, onDeleteSong }) {
- 
- 
- 
- 
+
+function PlaylistCard({ name, songs, playlists, onAddToPlaylist, onDeleteSong, onRemoveFromPlaylist, playlistId }) {
   return (
     <div>
       <h2>{name}</h2>
 
-      <div>
+      <div className="playcard">
         {songs.length === 0 && <p>No songs yet.</p>}
 
         {songs.map((song) => (
           <SongCard
-            key={song.id}
-            id={song.id}
+            key={song.id || song._id}
+            id={song.id || song._id}
             name={song.name}
             artist={song.artist}
             length={song.length}
@@ -24,6 +21,8 @@ function PlaylistCard({ name, songs, playlists, onAddToPlaylist, onDeleteSong })
             playlists={playlists}
             onAddToPlaylist={onAddToPlaylist}
             onDeleteSong={onDeleteSong}
+            onRemoveFromPlaylist={onRemoveFromPlaylist}
+            playlistId={playlistId}
           />
         ))}
       </div>
@@ -32,4 +31,3 @@ function PlaylistCard({ name, songs, playlists, onAddToPlaylist, onDeleteSong })
 }
 
 export default PlaylistCard;
-

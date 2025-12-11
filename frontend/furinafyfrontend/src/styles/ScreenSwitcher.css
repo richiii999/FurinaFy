@@ -19,6 +19,7 @@
     color:gold;
     grid-row: buttons;
     background-color: blue;
+    
 }
 
 
@@ -33,5 +34,8 @@
     color:blue;
     grid-row: buttons;
     background-color: cyan;
+    border: solid .05em;
+     border-color: gold;
+     transition: 0.7s ease-in-out;
 }
 
