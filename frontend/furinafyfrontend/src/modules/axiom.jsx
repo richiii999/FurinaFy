@@ -34,3 +34,8 @@ export async function deleteSongFromDB(id) {
     throw new Error("Failed to delete song");
   }
 }
+
+export async function getAllPlaylists() {
+  const res = await axios.get("http://localhost:3000/allplaylists");
+  return res.data;
+}

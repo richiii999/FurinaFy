@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAllSongs, uploadSong, deleteSongFromDB } from "./axiom";
+import { getAllSongs, uploadSong, deleteSongFromDB, getAllPlaylists } from "./axiom";
 import SongsScreen from "./SongsScreen";
 import PlaylistScreen from "./PlaylistScreen";
 import SearchBar from "./SearchBar";
@@ -12,18 +12,26 @@ function ScreenSwitcher() {
   const [songs, setSongs] = useState([]);
   const [playlists, setPlaylists] = useState([]);
 
-  //fetch the songs from DB
-  useEffect(() => {
-    async function loadSongs() {
-      try {
-        const data = await getAllSongs();
-        setSongs(data);
-      } catch (err) {
-        console.error("Error fetching songs:", err);
-      }
+  //fetch the songs and playlists from DB
+useEffect(() => {
+  async function loadData() {
+    try {
+      const songData = await getAllSongs();
+      const playlistData = await getAllPlaylists();
+
+      console.log("SONGS FROM DB:", songData);
+      console.log("PLAYLISTS FROM DB:", playlistData);
+
+      setSongs(songData);
+      setPlaylists(playlistData);
+    } catch (err) {
+      console.error("Error loading data:", err);
     }
-    loadSongs();
-  }, []);
+  }
+
+  loadData();
+}, []);
+
 
   // create a playlist 
   const createPlaylist = () => {
@@ -210,6 +218,7 @@ async function askSongMetadata() {
       {active === "playlists" && ( //playlist info
         <PlaylistScreen
           items={filteredPlaylists}
+          songs={songs}
           onDeletePlaylist={deletePlaylist}
           onAddToPlaylist={onAddToPlaylist}
           onDeleteSong={deleteSong}
