@@ -67,9 +67,13 @@ const deleteSong = (id) => {
   );
 };
 
-//filter the songs so that you can easily search 
+//filter the songs and playlists so that you can easily search 
   const filteredSongs = songs.filter(s =>
     s.title?.toLowerCase().includes(query.toLowerCase())
+  );
+
+  const filteredPlaylists = playlists.filter(pl =>
+    pl.name?.toLowerCase().includes(query.toLowerCase())
   );
 
   return (
@@ -93,7 +97,7 @@ const deleteSong = (id) => {
 
       {active === "playlists" && ( //playlist info 
         <PlaylistScreen
-          items={playlists}
+          items={filteredPlaylists}
           onDeletePlaylist={deletePlaylist}
           onAddToPlaylist={onAddToPlaylist}
           onDeleteSong={deleteSong}
