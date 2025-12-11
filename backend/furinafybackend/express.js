@@ -88,6 +88,17 @@ app.patch('/updateplaylist/:_id', async (req,res) => {
     }
 });
 
+app.delete('/deleteplaylist/:_id', async (req,res) => {
+    try {
+        const response = await Playlist.deleteOne(req.params);
+        res.status(200).json(response);
+    }
+    catch(error){
+        console.log(error.message);
+        res.status(500).json({message : error.message});
+    }
+});
+
 //connect to mongodb (may need to use async)
 mongoose.connect('mongodb://127.0.0.1:27017/Music_Player')
     .then(() => {
