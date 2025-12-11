@@ -76,61 +76,77 @@ function ScreenSwitcher() {
     });
   }
 
-  //upload an image and delay response (it works)  
- function awaitFilePick(inputEl) {
-  return new Promise((resolve, reject) => {
-    inputEl.onchange = () => resolve(inputEl.files[0] || null);
-    inputEl.onerror = reject;
+  //deals with delay and allows multiple file uploads  
+ function pickFile(accept) {
+  return new Promise(resolve => {
+    const picker = document.createElement("input");
+    picker.type = "file";
+    picker.accept = accept;
+    picker.style.display = "none";
+
+    picker.onchange = () => resolve(picker.files[0] || null);
+
+    document.body.appendChild(picker);
+    picker.click();
+
+    picker.addEventListener("change", () => {
+      setTimeout(() => picker.remove(), 0);
+    });
   });
 }
 
 //handles the upload for files to be added to DB 
-async function handleUpload(e) {
-  const audioFile = e.target.files[0];
-  if (!audioFile) return;
-
-  const base64Song = await fileToBase64(audioFile);
-
-  //create image picker and attach
-  const imgPicker = document.createElement("input");
-  imgPicker.type = "file";
-  imgPicker.accept = "image/*";
-  imgPicker.style.display = "none";
-  document.body.appendChild(imgPicker);
-
-  //trigger the picker immediately while still in the user gesture
-  imgPicker.click();
-
-  //wait for file selection
-  const imgFile = await awaitFilePick(imgPicker);
-  document.body.removeChild(imgPicker);
-
-  if (!imgFile) {
-    alert("You must upload a picture.");
-    return;
-  }
-
-  //now ask for metadata
-  const title = prompt("Enter song title:");
-  const length = prompt("Enter song length (ex: 3:45)");
-  const artist = prompt("Enter the artist name");
-  if (!title || !length || !artist) {
-    alert("Missing song title, length or artist.");
-    return;
-  }
-
-  const base64Pic = await fileToBase64(imgFile);
-
-  const newSong = { title, length, artist, picture: base64Pic, song: base64Song };
-
+async function startSongUpload() {
   try {
+    const audioFile = await pickFile("audio/*");
+    if (!audioFile) return;
+
+    const imgFile = await pickFile("image/*");
+    if (!imgFile) {
+      alert("You must upload a picture.");
+      return;
+    }
+
+    //prompt for title, length, artist 
+    const metadata = await askSongMetadata();
+    if (!metadata) return;
+
+    const base64Song = await fileToBase64(audioFile);
+    const base64Pic = await fileToBase64(imgFile);
+
+    const newSong = {
+      title: metadata.title,
+      length: metadata.length,
+      artist: metadata.artist,
+      picture: base64Pic,
+      song: base64Song
+    };
+
     const created = await uploadSong(newSong);
     setSongs(prev => [...prev, created]);
+
+    alert("Song uploaded!");
+
   } catch (err) {
-    console.error("Upload failed:", err);
+    console.error(err);
     alert("Upload failed.");
   }
 }
+
+//ask for specific info from user
+async function askSongMetadata() {
+  const title = prompt("Enter song title:");
+  const length = prompt("Enter song length (ex: 3:45)");
+  const artist = prompt("Enter the artist name:");
+
+  if (!title || !length || !artist) {
+    alert("Missing metadata.");
+    return null;
+  }
+
+  return { title, length, artist };
+}
+
 
   //filter the songs and playlists so that you can easily search 
   const filteredSongs = songs.filter(s =>
@@ -143,7 +159,7 @@ async function handleUpload(e) {
 
   return (
     <div>
-      <input type="file" accept="audio/*" onChange={handleUpload} />
+     <button onClick={startSongUpload}>Upload Song</button>
 
       <button onClick={() => setActive("songs")}>Songs</button>
       <button onClick={() => setActive("playlists")}>Playlists</button>
