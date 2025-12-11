@@ -33,6 +33,10 @@ function SongCard({ //all the stuff that we got from the DB + stuff that we got 
     setOpen(false);
   };
 
+
+
+  
+
   return (
     <div className="songCard" onClick={onClick}>
 
@@ -55,7 +59,7 @@ function SongCard({ //all the stuff that we got from the DB + stuff that we got 
       <button className="deleteButton" onClick={() => onDeleteSong(id)}>Delete Song</button>
        
       {playlistId && onRemoveFromPlaylist && ( //this only allows it to show on the playlist screen 
-      <button onClick={() => onRemoveFromPlaylist(id, playlistId)}>Remove from Playlist</button>
+      <button  onClick={() => onRemoveFromPlaylist(id, playlistId)}>Remove from Playlist</button>
       )}
 
        

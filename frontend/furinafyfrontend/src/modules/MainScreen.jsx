@@ -9,7 +9,7 @@ import ScreenSwitcher from "./ScreenSwitcher";
 function MainScreen() {
    return (
     <div className="mainbox">
-
+      <img className="ourqueen" src="../public/furina_sil.png"></img>
      <ScreenSwitcher />
 
  

@@ -58,18 +58,24 @@ body{
   background-image: url("/public/water.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: 0em -30em;
+  background-position: 0em 0em;
   color: gold;
   
 }
+.ourqueen{
+width: 10em;
+margin-top: -5em;
+height: auto;
 
+
+}
 .mainbox{
   padding: 5em;
   background-color: transparent;
   backdrop-filter: blur(10px);
   background-image: url("/public/water.jpg");
   background-position: -3em,1em;
-
+  width: 70em;
   border-radius: 1em;
 
 
@@ -92,29 +98,6 @@ color:gold;
 }
 
 
- .SongsScreen{
- 
-
-
-
-  background-color: rgb(74,134,232);
-    box-shadow: 0 0 10px rgba(0,0,0,.2);
-    border-radius: 10px; 
-  
-  width: 55em;
-  margin:1em;
-  margin-left: 4em;
-
-  background-color: transparent;
-  backdrop-filter: blur(40px);
-
-
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-
-  
-}
 .PlaylistScreen{
 
   background-color: rgb(74,134,232);
