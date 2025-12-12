@@ -160,7 +160,7 @@ function handlePrev() {
 
 
 
- <MusicPlayer audioSrc={curr?.audioSrc} title={curr?.title} imagine={curr?.imagine} onSongEnd={handleSongEnd} onNext={handleNext} onPrev={handlePrev}></MusicPlayer>
+ <MusicPlayer audioSrc={curr?.audioSrc} title={curr?.title} imagine={curr?.imagine} onSongEnd={handleSongEnd} onNext={handleNext} onPrev={handlePrev} showPlaylistControls={true}></MusicPlayer>
     </div>
   );
 }

@@ -11,7 +11,7 @@ import "../styles/MusicPlayer.css"
 
 
 
-const MusicPlayer = ({audioSrc, imagine, title,onSongEnd,onNext,onPrev}) => {
+const MusicPlayer = ({audioSrc, imagine, title,onSongEnd,onNext,onPrev,showPlaylistControls = false}) => {
 
 const [isPlaying, setIsPlaying] = useState(false);
 const [currentTime, setCurrentTime] =useState(0);
@@ -183,14 +183,16 @@ onChange={handleSeek}
 
 {/*******************************GO PREV AND GO NEXT ARE NOT WORKING I PLANNED FOR THEM TO BE RECURSIVE *****/}
 
-
-<button className="playbutton" onClick={onPrev}>
+{showPlaylistControls && (
+   <button className="playbutton" onClick={onPrev}>
     <span> {/***idk what span does it's just there in the totorial */}
         {
        <img src="./prev.png"></img>
         }
     </span>
-</button>
+  </button> 
+)}
+
 <button className="playbutton" onClick={handlePlayPause}>
     <span> {/***idk what span does it's just there in the totorial */}
         {
@@ -199,11 +201,14 @@ onChange={handleSeek}
         }
     </span>
 </button>
+
+{showPlaylistControls && (
 <button className="playbutton" onClick={onNext}>
     <span> {/***idk what span does it's just there in the totorial */}
      <img src="./next.png"></img>
     </span>
 </button>
+)}
 
 
 

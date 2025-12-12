@@ -56,7 +56,7 @@ imagine:song.picture
     </div>
 
 
-    <MusicPlayer audioSrc={curr?.audioSrc} title={curr?.title} imagine={curr?.imagine}></MusicPlayer>
+    <MusicPlayer audioSrc={curr?.audioSrc} title={curr?.title} imagine={curr?.imagine} showPlaylistControls={false}></MusicPlayer>
 
   </div>
   );
