@@ -55,13 +55,14 @@ button{
 body{
   background: solid;
   background-color: rgb(74,134,232);
-  background-image: url("/public/water.jpg");
+  background-image: url("/public/water1.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 0em 0em;
   color: gold;
-  
+
 }
+
 .ourqueen{
 width: 10em;
 margin-top: -5em;

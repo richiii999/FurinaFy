@@ -17,11 +17,11 @@ function App() {
   
       <MainScreen></MainScreen>
       
-      
-
-
-
       </>
+
+
+
+    
     
     
   )
