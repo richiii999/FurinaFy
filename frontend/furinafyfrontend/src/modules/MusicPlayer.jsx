@@ -9,7 +9,14 @@ import { useRef, useState, useEffect} from "react";
 
 import "../styles/MusicPlayer.css"
 
+function timeFormat(totalSeconds){
+  const hours = Math.floor(totalSeconds / 3600);
+  totalSeconds %= 3600;
+  const minutes = Math.floor(totalSeconds/60);
+  const seconds = Math.floor(totalSeconds % 60);
 
+  return [hours,minutes,seconds].map(unit => unit.toString().padStart(2,'0')).join(':')
+;}
 
 const MusicPlayer = ({audioSrc, imagine, title,onSongEnd,onNext,onPrev,showPlaylistControls = false}) => {
 
@@ -176,8 +183,8 @@ onChange={handleSeek}
 {/*************the numbers below image */}
 <div className='track-duration'>
 
-<p> {currentTime}</p>
-<p>{duration}</p>
+<p> {timeFormat(currentTime)}</p>
+<p>{timeFormat(duration)}</p>
 
 </div>
 
