@@ -26,8 +26,6 @@
 
 
 
-
-
 .musicPlayer button{
   grid-column: stuff;
     grid-row: stuff;
@@ -52,6 +50,12 @@ margin-bottom: 2em;
 height: auto;
 border-radius: 50%;
 
+
+}
+
+
+.playbutton:hover{
+  border: solid .4em gold;
 }
 input[type="range"]{
 

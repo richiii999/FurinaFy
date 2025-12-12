@@ -1,8 +1,25 @@
 
+.playcard{
 
+ width: 65em;
+padding:1em;
+
+background-color: transparent;
+backdrop-filter: blur(40px);
+box-shadow: 0 0 10px rgba(0,0,0,.2);
+border-radius: 10px; 
+height: auto;
+margin-left: 2em;
+display: flex;
+flex-wrap: wrap;
+
+
+
+}
 
 .playcard .songCard {
-width: 25em;
+flex-shrink: 0;  
+width: 23em;
 }
 
 
@@ -17,7 +34,8 @@ width: 25em;
     position: relative;
     color:gold;
     background-color: blue;
-font-size: 1.5em;
+font-size:1.5em;
+font-weight: 600;
 
 
 }

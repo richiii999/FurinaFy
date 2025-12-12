@@ -2,32 +2,15 @@
 
 
 
-
-.playlistScreen button{
-  padding: 1em;
-    border-radius: 10%;
-    width: 10em;
-    margin: 1em;
-    margin-left: 2em;
-    position: relative;
-    color:gold;
  
-    background-color: blue;
-     transition: 0.7s ease-in-out;
-}
 
 
-.playlistScreen button:hover{
-
-    color:blue;
+.playlistScreen .Screenbutton:hover{
+     color:blue;
     background-color: cyan;
     border: solid .05em;
     border-color: gold;
      transition: 0.7s ease-in-out;
-}
-
-
-.playlistScreen .Screenbutton:hover{
 
      padding: 1em;
     border-radius: 10%;
@@ -36,9 +19,20 @@
 }
 
 .playlistScreen .Screenbutton{
-
+  padding: 1em;
+    border-radius: 10%;
+    width: 10em;
+    margin: 1em;
+    margin-left: 2em;
+    position: relative;
+    color:gold;
+    
+    background-color: blue;
+     transition: 0.7s ease-in-out;
      padding: 1em;
     border-radius: 10%;
     width: 15em;
    
 }
+
+

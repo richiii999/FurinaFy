@@ -176,3 +176,7 @@ border-color: gold;
 
 
 }
+.songCard:hover .removeButton{
+     background-color: #03045e;
+    transition: 0.7s ease-in-out;
+}
