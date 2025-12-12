@@ -2,20 +2,21 @@ import SongCard from "./SongCard";
 
 function PlaylistCard(
   { name, songs, playlists, onAddToPlaylist, onDeleteSong, 
-    onRemoveFromPlaylist, playlistId, onsong }) {
+    onRemoveFromPlaylist, playlistId, onsong}) {
   
 
 
   
   return (
-    <div>
+    <div className="PlaylistCard">
 
-      /*********buttons */
-      <h2>{name}</h2>
-      <button  className="Screenbutton"onClick={()=> onsong(song)}>Playthelist</button>
-      /**************buttons */
-      
-      
+     {/* <h2>{name}</h2>*/}
+
+
+
+      <button  className="Playbutton"onClick={()=> onsong(song)}>Play: {name}</button>
+    
+            
       <div className="playcard">
         {songs.length === 0 && <p>No songs yet.</p>}
 
@@ -33,7 +34,7 @@ function PlaylistCard(
             onDeleteSong={onDeleteSong}
             onRemoveFromPlaylist={onRemoveFromPlaylist}
             playlistId={playlistId}
-            onClick={()=> onsong(song)}
+            onClick={()=> handleSongClick(song)}
           />
         ))}
       </div>

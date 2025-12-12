@@ -56,23 +56,27 @@ function SongCard({ //all the stuff that we got from the DB + stuff that we got 
         <audio controls src={audio}></audio>
       )}
       */}
-      <button className="songButton" onClick={() => setOpen(prev => !prev)}>Add to Playlist</button>
+     
+    
+       <button className="songButton" onClick={() => setOpen(prev => !prev)}>Add to Playlist</button>
+      
+      
       <button className="deleteButton" onClick={() => onDeleteSong(id)}>Delete Song</button>
        
-     {playlistId && onRemoveFromPlaylist && (
-        <button onClick={() => onRemoveFromPlaylist(id, playlistId)}>Remove from Playlist</button>
+     
+        {playlistId && onRemoveFromPlaylist && (
+        <button className="removeButton" onClick={() => onRemoveFromPlaylist(id, playlistId)}>Remove from Playlist</button>
       )}
 
-       
        
       
          
 
     <div className="play">
 
-        <div className="songDropdown">
-            {open && (
-              <div>
+        <div >
+            {open &&  (
+              <div className="songDropdown">
                 {availablePlaylists.length === 0 ? (
                   <p>No available playlists.</p>
                 ) : (

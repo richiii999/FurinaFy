@@ -10,3 +10,14 @@ width: 25em;
     margin-left: -2em;
 }
 
+.PlaylistCard .Playbutton{
+ padding: 1em;
+    border-radius: 10%;
+    
+    position: relative;
+    color:gold;
+    background-color: blue;
+font-size: 1.5em;
+
+
+}

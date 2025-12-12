@@ -120,6 +120,7 @@ border-color: gold;
     cursor: pointer;
     transition: border-color 0.25s;
       color: gold;
+      margin-left: 2em;
 
 }
 .songCard:hover .deleteButton{
@@ -140,7 +141,7 @@ border-color: gold;
     background-color: #00b4d8;
     border-radius: 10%;
     min-width: 7em;
-   margin-bottom: 2em;
+
    margin-left: 1em;
 
 }
@@ -155,4 +156,23 @@ border-color: gold;
 
    
     margin-top: 2em;
+}
+.songCard .removeButton{
+    position: relative;
+    margin: 3em;
+    margin-left: 7em;
+    padding: none;
+    width: 13em;
+    border-radius: 8px;
+    border: 1px solid transparent;
+
+    font-size: .9em;
+    font-weight: 500; 
+    font-family: inherit;
+      background-color: #00b4d8;
+    cursor: pointer;
+    transition: border-color 0.25s;
+      color: gold;
+
+
 }

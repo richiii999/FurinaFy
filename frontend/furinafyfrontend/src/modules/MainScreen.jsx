@@ -14,11 +14,6 @@ function MainScreen() {
 
  
 
-      <div className="musicPlayer">
-      { /** <MusicPlayer />**/}
-      {/** <AudioPlayer audioSrc={'https://www.computerhope.com/jargon/m/example.mp3'} title={"here"}></AudioPlayer>**/}
-      
-      </div>
     </div>
   );
 }
