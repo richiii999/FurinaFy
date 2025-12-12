@@ -253,8 +253,10 @@ async function askSongMetadata() {
       <div className="barbar">
       {/****<button onClick={startSongUpload}>Upload Song</button>****/}
    
+      {active === "songs" &&
       <button className="Screenbutton" onClick={startSongUpload}>Upload Song</button>
-      
+      }
+
       <button className="Screenbutton" onClick={() => setActive("songs")}>Songs</button>
       <button className="Screenbutton" onClick={() => setActive("playlists")}>Playlists</button>
       
