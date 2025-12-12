@@ -41,7 +41,7 @@ imagine:song.picture
           id={song._id}
           name={song.title}
           length={song.length}
-          artist={song.artist || "Unknown Artist"}
+          artist={song.artist}
           picture={song.picture}
           audio={song.song}
           playlists={playlists}

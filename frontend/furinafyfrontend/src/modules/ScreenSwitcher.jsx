@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAllSongs } from "./axiom";
+import { getAllSongs, uploadSong, deleteSongFromDB, getAllPlaylists, createPlaylistInDB, updatePlaylistInDB, deletePlaylistFromDB } from "./axiom";
 import SongsScreen from "./SongsScreen";
 import PlaylistScreen from "./PlaylistScreen";
 import SearchBar from "./SearchBar";
@@ -12,70 +12,144 @@ function ScreenSwitcher() {
   const [songs, setSongs] = useState([]);
   const [playlists, setPlaylists] = useState([]);
 
-  //fetch the songs from DB
-  useEffect(() => {
-    async function loadSongs() {
-      try {
-        const data = await getAllSongs();
-        setSongs(data);
-      } catch (err) {
-        console.error("Error fetching songs:", err);
-      }
+  //fetch the songs and playlists from DB
+useEffect(() => {
+  async function loadData() {
+    try {
+      const songData = await getAllSongs();
+      const playlistData = await getAllPlaylists();
+
+      console.log("SONGS FROM DB:", songData);
+      console.log("PLAYLISTS FROM DB:", playlistData);
+
+      setSongs(songData);
+      setPlaylists(playlistData);
+    } catch (err) {
+      console.error("Error loading data:", err);
     }
-    loadSongs();
-  }, []);
+  }
 
-  // create a playlist 
-  const createPlaylist = () => {
-    const name = prompt("Enter playlist name:");
-    if (!name) return;
+  loadData();
+}, []);
 
+
+  // create a playlist and send it to the website/DB
+const createPlaylist = async () => {
+  const name = prompt("Enter playlist name:");
+  if (!name) return;
+
+  try {
     const newPlaylist = {
-      id: playlists.length + 1,
       name,
-      songs: []
+      songs: [] 
     };
 
-    setPlaylists(prev => [...prev, newPlaylist]);
-  };
+    const createdPlaylist = await createPlaylistInDB(newPlaylist);
+
+    setPlaylists(prev => [...prev, createdPlaylist]);
+
+    alert("Playlist created!");
+
+  } catch (err) {
+    console.error(err);
+    alert("Failed to create playlist in DB.");
+  }
+};
   
-  //delete a playlist
-  const deletePlaylist = (id) => {
-    setPlaylists(prev => prev.filter(pl => pl.id !== id));
-  };
+  //delete a playlist and update website/DB
+  const deletePlaylist = async (playlistId) => {
+    console.log(playlistId)
+  try {
+    await deletePlaylistFromDB(playlistId);
+
+    setPlaylists(prev =>
+      prev.filter(pl => String(pl._id) !== String(playlistId))
+    );
+
+    alert("Playlist deleted!");
+  } catch (err) {
+    console.error(err);
+    alert("Failed to delete playlist.");
+  }
+};
 
   //add a song to a playlist
- const onAddToPlaylist = (song, playlistId) => {
-    setPlaylists(prev =>
-      prev.map(pl =>
-        pl.id === playlistId
-          ? { ...pl, songs: [...pl.songs, song] }
-          : pl
-      )
-    );
-  };
-  //delete a song from songs or playlists (refresh to get the song back)
-  const deleteSong = (id) => {
-  setSongs(prev => prev.filter(s => s.id !== id && s._id !== id));
+  const onAddToPlaylist = (song, playlistId) => {
   setPlaylists(prev =>
-     prev.map(pl => ({
-       ...pl,
-       songs: pl.songs.filter(s => s.id !== id && s._id !== id)
-     }))
-   );
- };
+    prev.map(pl =>
+      pl._id === playlistId
+        ? { ...pl, songs: [...pl.songs, song._id] }
+        : pl
+    )
+  );
+};
+
+//update a playlist and gets sent to DB to store
+const onUpdatePlaylist = async (playlistId, songsArray) => {
+  try {
+    await updatePlaylistInDB(playlistId, { songs: songsArray });
+
+    const freshPlaylists = await getAllPlaylists();
+
+    setPlaylists(
+      freshPlaylists.map(pl => ({
+        ...pl,
+        songs: Array.isArray(pl.songs) ? pl.songs : []
+      }))
+    );
+
+    alert("Playlist updated!");
+  } catch (err) {
+    console.error(err);
+    alert("Failed to update playlist in DB.");
+  }
+};
+
+
+  //delete a song from songs or playlists (deletes from DB)
+  const deleteSong = async (id) => {
+    console.log(id)
+  try {
+    //delete the song from DB first
+    await deleteSongFromDB(id); 
+
+    //remove from songs screen
+    setSongs(prev => prev.filter(s => s.id !== id && s._id !== id));
+
+    //remove from all playlists
+    setPlaylists(prev =>
+      prev.map(pl => ({
+        ...pl,
+        songs: pl.songs.filter(s => (s.id || s._id) !== id)
+      }))
+    );
+
+    alert("Song deleted.");
+  } catch (err) {
+    console.error(err);
+    alert("Failed to delete song from database.");
+  }
+};
+
 
 
   // remove a song from only ONE playlist
   const removeSongFromPlaylist = (songId, playlistId) => {
   setPlaylists(prev =>
-      prev.map(pl =>
-        pl.id === playlistId
-          ? { ...pl, songs: pl.songs.filter(s => s.id !== songId && s._id !== songId) }
-          : pl
-      )
-    );
-  };
+    prev.map(pl =>
+      pl._id === playlistId
+        ? {
+            ...pl,
+            songs: pl.songs.filter(id =>
+              String(id) !== String(songId)
+            )
+          }
+        : pl
+    )
+  );
+};
+
+
   //file converter
   function fileToBase64(file) {
     return new Promise((resolve, reject) => {
@@ -133,10 +207,13 @@ async function startSongUpload() {
     };
 
     const created = await uploadSong(newSong);
-    setSongs(prev => [...prev, created]);
 
-    alert("Song uploaded!");
-
+    const normalized = {
+    ...created,
+  _id: created._id || created.id,  
+  };
+  alert("Upload Succeessful!")
+  setSongs(prev => [...prev, normalized]);
   } catch (err) {
     console.error(err);
     alert("Upload failed.");
@@ -170,9 +247,14 @@ async function askSongMetadata() {
 
   return (
     <div className="ScreenSwitcher">
+      
+
+     
       <div className="barbar">
       {/****<button onClick={startSongUpload}>Upload Song</button>****/}
-
+      {active === "songs" &&
+      <button onClick={startSongUpload}>Upload Song</button>
+      }
       <button className="Screenbutton" onClick={() => setActive("songs")}>Songs</button>
       <button className="Screenbutton" onClick={() => setActive("playlists")}>Playlists</button>
       
@@ -195,11 +277,13 @@ async function askSongMetadata() {
       {active === "playlists" && ( //playlist info
         <PlaylistScreen
           items={filteredPlaylists}
+          songs={songs}
           onDeletePlaylist={deletePlaylist}
           onAddToPlaylist={onAddToPlaylist}
           onDeleteSong={deleteSong}
           onCreatePlaylist={createPlaylist}
           onRemoveFromPlaylist={removeSongFromPlaylist}
+          onUpdatePlaylist={onUpdatePlaylist}
         />
       )}
 

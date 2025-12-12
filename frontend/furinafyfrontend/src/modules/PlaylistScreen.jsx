@@ -2,13 +2,15 @@ import PlaylistCard from "./PlaylistCard";
 import {useState} from "react";
 import MusicPlayer from "./MusicPlayer"
 
-function PlaylistScreen({ //pass in all the items from screenswitcher for playlistscreen to utilize
-  items, 
-  onDeletePlaylist, 
-  onAddToPlaylist, 
+function PlaylistScreen({
+  items,
+  songs,
+  onDeletePlaylist,
+  onAddToPlaylist,
   onDeleteSong,
   onCreatePlaylist,
-  onRemoveFromPlaylist  
+  onRemoveFromPlaylist,
+  onUpdatePlaylist
 }) {
 
 
@@ -38,7 +40,6 @@ imagine:song.picture
       {/*create a playlist*/}
       <button  className="Screenbutton"onClick={onCreatePlaylist}>+ Create Playlist</button>
 
-      {/*checks to see if theres no playlists and prompts for the user to make one*/}
       {items.length === 0 && (
         <p>No playlists yet. Click “Create Playlist”.</p>
       )}
@@ -51,11 +52,15 @@ imagine:song.picture
         <div key={playlist.id}> 
           <PlaylistCard
          name={playlist.name}
-            songs={playlist.songs}
+          songs={(playlist.songs || [])
+          .map(id => songs.find(song => String(song._id) === String(id)))
+          .filter(Boolean)
+          }
             playlists={items}
             onAddToPlaylist={onAddToPlaylist}
             onDeleteSong={onDeleteSong}
             onRemoveFromPlaylist={onRemoveFromPlaylist} 
+            playlistId={playlist._id}
             onsong={handleSongClick}
           />
         
@@ -66,6 +71,13 @@ imagine:song.picture
             {/*delete playlist button that actually deletes a playlist*/}
             Delete Playlist
           </button>
+
+
+          <button onClick={() =>  onUpdatePlaylist(playlist._id, (items.find(p => p._id === playlist._id)?.songs || []))}>
+             Update Playlist
+          </button>
+
+          
         </div>
       ))}
     </div>
@@ -78,5 +90,3 @@ imagine:song.picture
 }
 
 export default PlaylistScreen;
-
-

@@ -7,7 +7,6 @@ function PlaylistCard(
 
 
   
-  
   return (
     <div>
 
@@ -24,7 +23,7 @@ function PlaylistCard(
           <SongCard
             key={song.id || song._id}
             id={song.id || song._id}
-            name={song.name}
+            name={song.title}
             artist={song.artist}
             length={song.length}
             picture={song.picture}
