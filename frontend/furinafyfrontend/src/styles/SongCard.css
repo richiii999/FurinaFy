@@ -49,6 +49,14 @@
     border-radius: 50%; /* Circular crop */
     
 }
+.songCard .songImage:hover{
+    grid-area: songImageArea;
+    width: 5em;
+    border-radius: 50%; /* Circular crop */
+    border: solid .2em gold;
+    cursor: pointer;
+    
+}
 
 
 .songCard .songTitle{

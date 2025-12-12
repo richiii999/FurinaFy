@@ -37,12 +37,12 @@ function SongCard({ //all the stuff that we got from the DB + stuff that we got 
   
 
   return (
-    <div className="songCard" onClick={onClick}>
+    <div className="songCard" >
 
 
 
 
-      {picture && <img className="songImage" src={picture} alt="song" />}
+      {picture && <img className="songImage" onClick={onClick} src={picture} alt="song" />}
 
       <h2 className="songTitle">{songName}</h2>
       <p className="songLength">{songLength}</p>
