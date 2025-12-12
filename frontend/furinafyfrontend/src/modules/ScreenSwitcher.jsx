@@ -207,10 +207,13 @@ async function startSongUpload() {
     };
 
     const created = await uploadSong(newSong);
-    setSongs(prev => [...prev, created]);
 
-    alert("Song uploaded!");
-
+    const normalized = {
+    ...created,
+  _id: created._id || created.id,  
+  };
+  alert("Upload Succeessful!")
+  setSongs(prev => [...prev, normalized]);
   } catch (err) {
     console.error(err);
     alert("Upload failed.");
