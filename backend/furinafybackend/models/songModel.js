@@ -10,6 +10,10 @@ const songSchema = mongoose.Schema({
         type : String,
         required : [true, "Please enter a length"]
     },
+    artist :{
+        type : String,
+        required : [true, "Please enter artist"]
+    },
     picture : {
         type : String,
         required : [true, "Please enter base64 url of picture"]

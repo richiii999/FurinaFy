@@ -14,6 +14,7 @@ function SongCard({ //all the stuff that we got from the DB + stuff that we got 
   playlistId,
   onClick
 }) {
+  
   const songName = name || "Untitled Song";
   const songLength = length || "0:00";
   const songArtist = artist || "Unknown Artist";
@@ -25,22 +26,14 @@ function SongCard({ //all the stuff that we got from the DB + stuff that we got 
   (pl) => Array.isArray(pl.songs) && !pl.songs.some((sId) => String(sId) === String(id))
   );
 
-
   const handleAddToPlaylist = (plId) => {
     const songData = { _id: id, title: songName, artist: songArtist, length: songLength, picture, song: audio };
     onAddToPlaylist(songData, plId);
     setOpen(false);
   };
 
-
-
-  
-
   return (
     <div className="songCard" >
-
-
-
 
       {picture && <img className="songImage" onClick={onClick} src={picture} alt="song" />}
 
@@ -48,32 +41,21 @@ function SongCard({ //all the stuff that we got from the DB + stuff that we got 
       <p className="songLength">{songLength}</p>
       <p className="songArtist">{songArtist}</p>
 
-
-
-
       {/* audio player 
       {audio && (
         <audio controls src={audio}></audio>
       )}
       */}
      
-    
        <button className="songButton" onClick={() => setOpen(prev => !prev)}>Add to Playlist</button>
       
-      
-      <button className="deleteButton" onClick={() => onDeleteSong(id)}>Delete Song</button>
+       <button className="deleteButton" onClick={() => onDeleteSong(id)}>Delete Song</button>
        
-     
-        {playlistId && onRemoveFromPlaylist && (
+      {playlistId && onRemoveFromPlaylist && (
         <button className="removeButton" onClick={() => onRemoveFromPlaylist(id, playlistId)}>Remove from Playlist</button>
       )}
 
-       
-      
-         
-
     <div className="play">
-
         <div >
             {open &&  (
               <div className="songDropdown">
@@ -94,12 +76,9 @@ function SongCard({ //all the stuff that we got from the DB + stuff that we got 
               </div>
             )}
         </div>
-
-
     </div>
-     
-    </div>
-  );
+  </div>
+ );
 }
 
 export default SongCard;

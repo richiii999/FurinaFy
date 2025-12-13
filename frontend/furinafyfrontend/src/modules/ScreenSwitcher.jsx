@@ -1,241 +1,178 @@
-import { useEffect, useState } from "react";
-import { getAllSongs, uploadSong, deleteSongFromDB, getAllPlaylists, createPlaylistInDB, updatePlaylistInDB, deletePlaylistFromDB } from "./axiom";
+import { useEffect, useState, useRef } from "react";
+import {
+  getAllSongs,
+  uploadSong,
+  deleteSongFromDB,
+  getAllPlaylists,
+  createPlaylistInDB,
+  updatePlaylistInDB,
+  deletePlaylistFromDB
+} from "./axiom";
+
 import SongsScreen from "./SongsScreen";
 import PlaylistScreen from "./PlaylistScreen";
 import SearchBar from "./SearchBar";
 
 function ScreenSwitcher() {
-  //used to swap between playlist and songs (for searchbar and other things)
+  //the different states for the website - songs and playlists
   const [active, setActive] = useState("songs");
   const [query, setQuery] = useState("");
 
   const [songs, setSongs] = useState([]);
   const [playlists, setPlaylists] = useState([]);
 
-  //fetch the songs and playlists from DB
-useEffect(() => {
-  async function loadData() {
-    try {
-      const songData = await getAllSongs();
-      const playlistData = await getAllPlaylists();
+  //audio and image input 
+  const audioInputRef = useRef(null);
+  const imageInputRef = useRef(null);
 
-      console.log("SONGS FROM DB:", songData);
-      console.log("PLAYLISTS FROM DB:", playlistData);
+  const [audioFile, setAudioFile] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
 
-      setSongs(songData);
-      setPlaylists(playlistData);
-    } catch (err) {
-      console.error("Error loading data:", err);
+  //loads all songs and playlists from DB
+  useEffect(() => {
+    async function loadData() {
+      try {
+        setSongs(await getAllSongs());
+        setPlaylists(await getAllPlaylists());
+      } catch (err) {
+        console.error("Error loading data:", err);
+      }
     }
-  }
+    loadData();
+  }, []);
 
-  loadData();
-}, []);
+  //create a playlist for website/DB
+  const createPlaylist = async () => {
+    const name = prompt("Enter playlist name:");
+    if (!name) return;
 
+    try {
+      const created = await createPlaylistInDB({ name, songs: [] });
+      setPlaylists(prev => [...prev, created]);
+      alert("Playlist created!");
+    } catch {
+      alert("Failed to create playlist.");
+    }
+  };
 
-  // create a playlist and send it to the website/DB
-const createPlaylist = async () => {
-  const name = prompt("Enter playlist name:");
-  if (!name) return;
-
-  try {
-    const newPlaylist = {
-      name,
-      songs: [] 
-    };
-
-    const createdPlaylist = await createPlaylistInDB(newPlaylist);
-
-    setPlaylists(prev => [...prev, createdPlaylist]);
-
-    alert("Playlist created!");
-
-  } catch (err) {
-    console.error(err);
-    alert("Failed to create playlist in DB.");
-  }
-};
-  
-  //delete a playlist and update website/DB
+  //delete playlist from website/DB
   const deletePlaylist = async (playlistId) => {
     console.log(playlistId)
-  try {
-    await deletePlaylistFromDB(playlistId);
-
-    setPlaylists(prev =>
-      prev.filter(pl => String(pl._id) !== String(playlistId))
-    );
-
-    alert("Playlist deleted!");
-  } catch (err) {
-    console.error(err);
-    alert("Failed to delete playlist.");
-  }
-};
-
-  //add a song to a playlist
+    try {
+      await deletePlaylistFromDB(playlistId);
+      setPlaylists(prev => prev.filter(pl => pl._id !== playlistId));
+      alert("Playlist deleted!");
+    } catch {
+      alert("Failed to delete playlist.");
+    }
+  };
+  //add a song to the playlist
   const onAddToPlaylist = (song, playlistId) => {
-  setPlaylists(prev =>
-    prev.map(pl =>
-      pl._id === playlistId
-        ? { ...pl, songs: [...pl.songs, song._id] }
-        : pl
-    )
-  );
-};
-
-//update a playlist and gets sent to DB to store
-const onUpdatePlaylist = async (playlistId, songsArray) => {
-  try {
-    await updatePlaylistInDB(playlistId, { songs: songsArray });
-
-    const freshPlaylists = await getAllPlaylists();
-
-    setPlaylists(
-      freshPlaylists.map(pl => ({
-        ...pl,
-        songs: Array.isArray(pl.songs) ? pl.songs : []
-      }))
-    );
-
-    alert("Playlist updated!");
-  } catch (err) {
-    console.error(err);
-    alert("Failed to update playlist in DB.");
-  }
-};
-
-
-  //delete a song from songs or playlists (deletes from DB)
-  const deleteSong = async (id) => {
-    console.log(id)
-  try {
-    //delete the song from DB first
-    await deleteSongFromDB(id); 
-
-    //remove from songs screen
-    setSongs(prev => prev.filter(s => s.id !== id && s._id !== id));
-
-    //remove from all playlists
     setPlaylists(prev =>
-      prev.map(pl => ({
-        ...pl,
-        songs: pl.songs.filter(s => (s.id || s._id) !== id)
-      }))
+      prev.map(pl =>
+        pl._id === playlistId
+          ? { ...pl, songs: [...pl.songs, song._id] }
+          : pl
+      )
     );
+  };
+  
+  //update a playlist in the DB with the current playlist on your website
+  const onUpdatePlaylist = async (playlistId, songsArray) => {
+    try {
+      await updatePlaylistInDB(playlistId, { songs: songsArray });
+      setPlaylists(await getAllPlaylists());
+      alert("Playlist updated!");
+    } catch {
+      alert("Failed to update playlist.");
+    }
+  };
 
-    alert("Song deleted.");
-  } catch (err) {
-    console.error(err);
-    alert("Failed to delete song from database.");
-  }
-};
-
-
-
-  // remove a song from only ONE playlist
+  //remove a song from your playlist on the website
   const removeSongFromPlaylist = (songId, playlistId) => {
-  setPlaylists(prev =>
-    prev.map(pl =>
-      pl._id === playlistId
-        ? {
-            ...pl,
-            songs: pl.songs.filter(id =>
-              String(id) !== String(songId)
-            )
-          }
-        : pl
-    )
-  );
-};
+    setPlaylists(prev =>
+      prev.map(pl =>
+        pl._id === playlistId
+          ? { ...pl, songs: pl.songs.filter(id => id !== songId) }
+          : pl
+      )
+    );
+  };
 
+  //delete a song from the website/DB
+  const deleteSong = async (id) => {
+    try {
+      await deleteSongFromDB(id);
+      setSongs(prev => prev.filter(s => s._id !== id));
+      setPlaylists(prev =>
+        prev.map(pl => ({
+          ...pl,
+          songs: pl.songs.filter(songId => songId !== id)
+        }))
+      );
+      alert("Song deleted.");
+    } catch {
+      alert("Failed to delete song.");
+    }
+  };
 
-  //file converter
-  function fileToBase64(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = reject;
-    });
-  }
-
-  //deals with delay and allows multiple file uploads  
- function pickFile(accept) {
-  return new Promise(resolve => {
-    const picker = document.createElement("input");
-    picker.type = "file";
-    picker.accept = accept;
-    picker.style.display = "none";
-
-    picker.onchange = () => resolve(picker.files[0] || null);
-
-    document.body.appendChild(picker);
-    picker.click();
-
-    picker.addEventListener("change", () => {
-      setTimeout(() => picker.remove(), 0);
-    });
-  });
-}
-
-//handles the upload for files to be added to DB 
-async function startSongUpload() {
-  try {
-    const audioFile = await pickFile("audio/*");
-    if (!audioFile) return;
-
-    const imgFile = await pickFile("image/*");
-    if (!imgFile) {
-      alert("You must upload a picture.");
+  //upload a song to the website/DB
+  async function uploadSelectedSong() {
+    if (!audioFile || !imageFile) {
+      alert("Select both an audio file and an image.");
       return;
     }
 
-    //prompt for title, length, artist 
-    const metadata = await askSongMetadata();
-    if (!metadata) return;
+    try {
+      const metadata = await askSongMetadata();
+      if (!metadata) return;
 
-    const base64Song = await fileToBase64(audioFile);
-    const base64Pic = await fileToBase64(imgFile);
+      const songBase64 = await fileToBase64(audioFile);
+      const imageBase64 = await fileToBase64(imageFile);
+      
+      const created = await uploadSong({
+        title: metadata.title,
+        length: metadata.length,
+        artist: metadata.artist,
+        song: songBase64,
+        picture: imageBase64
+      });
+      console.log(created.artist)
+      setSongs(prev => [...prev, { ...created, _id: created._id || created.id }]);
 
-    const newSong = {
-      title: metadata.title,
-      length: metadata.length,
-      artist: metadata.artist,
-      picture: base64Pic,
-      song: base64Song
-    };
+      setAudioFile(null);
+      setImageFile(null);
+      audioInputRef.current.value = "";
+      imageInputRef.current.value = "";
 
-    const created = await uploadSong(newSong);
-
-    const normalized = {
-    ...created,
-  _id: created._id || created.id,  
-  };
-  alert("Upload Succeessful!")
-  setSongs(prev => [...prev, normalized]);
-  } catch (err) {
-    console.error(err);
-    alert("Upload failed.");
+      alert("Upload successful!");
+    } catch (err) {
+      console.error(err);
+      alert("Upload failed.");
+    }
   }
-}
-
-//ask for specific info from user
-async function askSongMetadata() {
-  const title = prompt("Enter song title:");
-  const length = prompt("Enter song length (ex: 3:45)");
-  const artist = prompt("Enter the artist name:");
-
-  if (!title || !length || !artist) {
-    alert("Missing metadata.");
-    return null;
+  
+  //convert audio/image files to base64
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
   }
 
-  return { title, length, artist };
-}
+  //prompt user for title, song duration, and artist name 
+  async function askSongMetadata() {
+    const title = prompt("Song title:");
+    const length = prompt("Song length (ex: 3:45):");
+    const artist = prompt("Artist name:");
 
+    if (!title || !length || !artist) return null;
+    return { title, length, artist };
+  }
 
-  //filter the songs and playlists so that you can easily search 
+  //filter songs/playlists
   const filteredSongs = songs.filter(s =>
     s.title?.toLowerCase().includes(query.toLowerCase())
   );
@@ -244,29 +181,63 @@ async function askSongMetadata() {
     pl.name?.toLowerCase().includes(query.toLowerCase())
   );
 
-
   return (
-    <div className="ScreenSwitcher">
-      
+    <div className="ScreenSwitcher"> 
+    {/*added hidden buttons, one for audio and one for image since modern browsers hate it*/}
+      <div className="barbar"> 
+        <input
+          type="file"
+          accept="audio/*"
+          hidden
+          ref={audioInputRef}
+          onChange={e => setAudioFile(e.target.files[0] || null)}
+        />
 
-     
-      <div className="barbar">
-      {/****<button onClick={startSongUpload}>Upload Song</button>****/}
-   
-      {active === "songs" &&
-      <button className="Screenbutton" onClick={startSongUpload}>Upload Song</button>
-      }
+        <input
+          type="file"
+          accept="image/*"
+          hidden
+          ref={imageInputRef}
+          onChange={e => setImageFile(e.target.files[0] || null)}
+        />
+        {/*update button, with the audio and image buttons*/}
+        {active === "songs" && (
+          <>
+            <button
+              className="Screenbutton"
+              onClick={() => audioInputRef.current.click()}
+            >
+              Choose Audio
+            </button>
 
-      <button className="Screenbutton" onClick={() => setActive("songs")}>Songs</button>
-      <button className="Screenbutton" onClick={() => setActive("playlists")}>Playlists</button>
-      
+            <button
+              className="Screenbutton"
+              onClick={() => imageInputRef.current.click()}
+            >
+              Choose Image
+            </button>
 
-      <SearchBar mode={active} onSearch={setQuery
-        /*all this line does is sets the specific screen/search bar to the corresponding playlists or song screen*/
-      } />
+            <button
+              className="Screenbutton"
+              disabled={!audioFile || !imageFile}
+              onClick={uploadSelectedSong}
+            >
+              Upload Song
+            </button>
+          </>
+        )}
+        {/*songs/playlist buttons*/}
+        <button className="Screenbutton" onClick={() => setActive("songs")}>
+          Songs
+        </button>
+        <button className="Screenbutton" onClick={() => setActive("playlists")}>
+          Playlists
+        </button>
+
+        <SearchBar mode={active} onSearch={setQuery} /> {/*triggers the different searchbar, one for playlist other for songs*/}
       </div>
 
-     {active === "songs" && ( //song info
+      {active === "songs" && ( //songs screen 
         <SongsScreen
           items={filteredSongs}
           playlists={playlists}
@@ -276,7 +247,7 @@ async function askSongMetadata() {
         />
       )}
 
-      {active === "playlists" && ( //playlist info
+      {active === "playlists" && ( //playlists screen
         <PlaylistScreen
           items={filteredPlaylists}
           songs={songs}
@@ -288,8 +259,6 @@ async function askSongMetadata() {
           onUpdatePlaylist={onUpdatePlaylist}
         />
       )}
-
-
     </div>
   );
 }

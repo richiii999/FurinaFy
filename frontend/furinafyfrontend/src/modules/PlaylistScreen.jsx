@@ -2,7 +2,6 @@ import PlaylistCard from "./PlaylistCard";
 import {useState} from "react";
 import MusicPlayer from "./MusicPlayer"
 
-
 function PlaylistScreen({ //pass in all the items from screenswitcher for playlistscreen to utilize
  items,
   songs,
@@ -26,9 +25,7 @@ setcurr({
 audioSrc:song.song,
 title: song.title,
 imagine:song.picture
-
 });
-
 }
 
 function onlist(songs) {
@@ -36,17 +33,13 @@ function onlist(songs) {
   setQueue(songs);
   setIndex(0);
 
-
 const first = songs[0];
   setcurr({
     audioSrc: first.song,
     title: first.title,
     imagine: first.picture
   });
-
-
 }
-
 
   function handleSongEnd() {
     if (index + 1 >= queue.length) 
@@ -60,12 +53,10 @@ const first = songs[0];
     title: nextnextsong.title,
     imagine: nextnextsong.picture
   });
-
   }
 
 function handleNext() {
     if (index + 1 >= queue.length) return;
-
    const nextsong = index + 1;
     setIndex(nextsong);
     const nextnextsong = queue[nextsong];
@@ -78,7 +69,6 @@ function handleNext() {
 
 function handlePrev() {
     if (index === 0) return;
-
     const previndex = index - 1;
     setIndex(previndex);
      const prevsong = queue[previndex];
@@ -88,7 +78,6 @@ function handlePrev() {
     imagine: prevsong.picture
   });
   }
-
 
   return (
     <div className="playlistScreen">
@@ -102,7 +91,7 @@ function handlePrev() {
       )}
 
       {items.map((playlist) => ( //prints out the actual playlist card to the screen 
-        <div key={playlist.id}> 
+        <div key={playlist._id}> 
           <PlaylistCard
             name={playlist.name}
             songs={(playlist.songs || [])
@@ -110,40 +99,24 @@ function handlePrev() {
              .filter(Boolean)
            }
             playlists={items}
-             onAddToPlaylist={onAddToPlaylist}
+            onAddToPlaylist={onAddToPlaylist}
             onDeleteSong={onDeleteSong}
-             onRemoveFromPlaylist={onRemoveFromPlaylist}
+            onRemoveFromPlaylist={onRemoveFromPlaylist}
             playlistId={playlist._id}
-
             onsong={handleSongClick}/***<---- so if songcard clicked song play**/
-
-
 
             /***********collects all the songs and calls function to play the playlist*************** */
              onlist={() => onlist(
               (playlist.songs || [])
             .map(id => songs.find(song => String(song._id) === String(id)))
              .filter(Boolean)
-
-
              )}
-
-
-
-
           />
 
-
-
-
-
-
-
-          <button className="Screenbutton" onClick={() => onDeletePlaylist(playlist.id)}>
+          <button className="Screenbutton" onClick={() => onDeletePlaylist(playlist._id)}>
             {/*delete playlist button that actually deletes a playlist*/}
             Delete Playlist
           </button>
-
 
           <button
            className="Screenbutton" 
@@ -152,13 +125,9 @@ function handlePrev() {
          playlist._id,
       (items.find(p => p._id === playlist._id)?.songs || []) )
       }> Update Playlist</button>
- 
 
         </div>
       ))}
-
-
-
 
  <MusicPlayer audioSrc={curr?.audioSrc} title={curr?.title} imagine={curr?.imagine} onSongEnd={handleSongEnd} onNext={handleNext} onPrev={handlePrev} showPlaylistControls={true}></MusicPlayer>
     </div>

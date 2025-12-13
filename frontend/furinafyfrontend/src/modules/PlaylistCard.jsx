@@ -3,17 +3,9 @@ import SongCard from "./SongCard";
 function PlaylistCard(
   { name, songs, playlists, onAddToPlaylist, onDeleteSong, 
     onRemoveFromPlaylist, playlistId, onsong,onlist}) {
-  
-
-
-  
+      
   return (
     <div className="PlaylistCard">
-
-     {/* <h2>{name}</h2>*/}
-
-
-
       <button  className="Screenbutton Playbutton"onClick={()=> {onlist()}}>Play: {name}</button>
     
             
@@ -38,11 +30,7 @@ function PlaylistCard(
           />
         ))}
       </div>
-
-      
     </div>
-
-
   );
 }
 
