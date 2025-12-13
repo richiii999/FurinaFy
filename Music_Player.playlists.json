@@ -1,0 +1,12 @@
+[{
+  "_id": {
+    "$oid": "693cc8856a0b15f026139cce"
+  },
+  "name": "Miku Music",
+  "songs": [
+    "693a1f37879efecfd66977da",
+    "693a13bcf52fabf9d548ce65",
+    "693a15acf52fabf9d548ce69"
+  ],
+  "__v": 0
+}]
